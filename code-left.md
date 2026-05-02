@@ -68,16 +68,19 @@ That artifact may be:
 
 The closer product intent is to production shape, the less translation loss happens between idea and shipped behavior.
 
-### The goal is not faster coding. The goal is safer directness.
+### The goal is faster, more accurate delivery of value—not faster typing.
 
-Code-left is valuable because it shortens the path between product intent and production **without removing control**.
+The point is **not** to maximize how fast an agent can write code. The point is to **run more bets per unit of time**, put each bet in front of **real users sooner**, and read **clearer signals** about whether value landed—while keeping **accuracy** in the product sense: correctness, trust, safety, fit to strategy, and fidelity to what you promised users.
 
-It gives product a more direct route.
-It gives engineering a higher-leverage role.
-It gives agents a safe execution envelope.
+Code-left shortens the path from **hypothesis → shippable change → validated learning**. It does that by reducing translation loss, queue time, and repeated rediscovery of “where changes belong” and “what safe looks like”—not by skipping discipline.
 
-This is not speed at the expense of rigor.
-This is rigor designed for speed.
+It gives product a **faster path to evidence** with engineering-defined guardrails, not a free pass around them.
+It gives engineering a higher-leverage role in defining **the system that makes speed safe**.
+It gives agents a bounded execution envelope so tempo does not silently trade away quality.
+
+**Rigor is what makes higher tempo responsible:** explicit seams, contracts, checks, and rollback—not heroics or vague tickets.
+
+For how the **product role** shifts in practice (artifacts, ownership, and collaboration), see [docs/pm-framework/product-role-in-code-left.md](docs/pm-framework/product-role-in-code-left.md). That doc is written to grow later into UX-specific guidance.
 
 ### The repository should expose seams, not mysteries.
 

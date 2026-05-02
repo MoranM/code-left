@@ -101,19 +101,39 @@ An earlier and more executive-oriented articulation of Code-Left.
 
 Useful for introducing the idea to teams that need a concise strategic framing before going into the deeper manifesto.
 
+### `docs/pm-framework/`
+
+Product-side framework: **every feature is a bet** on customer value, and strong bets need three kinds of context agents can use:
+
+1. **Where we want to get to** — vision, goals, strategy, principles.
+2. **Who we are now** — the shipping product, segments, market, stakeholders, and evidence (including analytics when you use them).
+3. **How we work** — the workflow from idea to brief to spec to ship, including review and escalation.
+
+Start with [docs/pm-framework/README.md](docs/pm-framework/README.md). For how the **product role** shifts under this model (and a hook for future UX docs), see [docs/pm-framework/product-role-in-code-left.md](docs/pm-framework/product-role-in-code-left.md).
+
+### `templates/pm/`
+
+Copy-paste templates for those three layers, a bet brief, complexity assessment, technical spec, and a **context source inventory** (docs plus tools such as PostHog or Google Analytics). See [templates/pm/README.md](templates/pm/README.md).
+
 ### `skills/`
 
-
+Agent-oriented **skills**: PM framework (map context, bet brief, complexity, technical spec), integration discovery, and helpers to build an integration orchestrator for your own repo. See [skills/README.md](skills/README.md).
 
 ### `docs/`
 
-Course materials for Level 5 product building with PM and engineer pairs.
-
-These materials support the human side of the operating model: teaching teams how to collaborate around clearer product intent, stronger technical framing, and better delivery loops.
+Additional course and collaboration materials may live here as the repo grows. The PM bet-and-context framework is under `docs/pm-framework/` above.
 
 ## Suggested Adoption Path
 
 Start narrow, learn quickly, and expand only after the workflow is reliable.
+
+### Product and context (PM)
+
+1. Map existing context sources with the **map-product-context** skill ([skills/pm/map-product-context/](skills/pm/map-product-context/)).
+2. Stand up the three layers (even one short file each) using `templates/pm/`.
+3. Run one real bet through **build-product-brief** → **assess-work-item-complexity** → **build-technical-spec**.
+
+### Engineering and integration
 
 1. Choose one high-repetition, low-risk change type.
 2. Document the allowed integration point.
