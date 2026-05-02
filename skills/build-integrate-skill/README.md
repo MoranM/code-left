@@ -105,7 +105,7 @@ Each integration point should eventually have its own playbook that defines:
 
 The orchestrator does not replace these playbooks. It discovers them, selects the relevant ones, sequences them, and enforces the stop points around them.
 
-Use the `map-integration-candidates` skill to locate a potential candidates for integration points in your codebase.
+### Use the `map-integration-candidates` skill to locate a potential candidates for integration points in your codebase.
 
 ## Generated Orchestrator Phases
 
