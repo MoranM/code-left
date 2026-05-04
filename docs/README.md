@@ -6,6 +6,8 @@ Start here if you want to apply Code-Left in a real repository.
 
 - [getting-started.md](getting-started.md) - the shortest path for a first pilot.
 - [implementation-guide.md](implementation-guide.md) - deeper guidance for expanding from one pilot to a repeatable operating model.
+- [../examples/first-pilot/](../examples/first-pilot/) - a filled-in first-pilot package.
+- [../skills/setup-code-left/](../skills/setup-code-left/) - an agent skill that guides the setup process.
 
 ## Product framework
 

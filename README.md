@@ -268,7 +268,7 @@ This repo can grow into a practical library of AI-readiness assets, including:
 - production safety policies
 - examples of AI-ready repo structures
 - training material for PM and engineering pairs
-- a setup-orchestrator skill that guides the full Code-Left adoption flow
+- more setup and adoption skills for common Code-Left rollout paths
 
 ## The Operating Agreement
 

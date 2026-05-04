@@ -37,6 +37,8 @@ If the user already gave enough direction, proceed without asking.
 
 ## Phase 2 — Inspect the Existing Skill System
 
+Resolve `<agent-config>` to the target project's actual agent skill path before running commands. If the path is unknown, inspect documented repo conventions first and ask before writing.
+
 Map the target project's skill structure before drafting:
 
 ```bash

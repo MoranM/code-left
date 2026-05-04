@@ -12,9 +12,9 @@ The first pilot has three artifacts:
 
 Those three files are enough to test whether product intent can move toward production through an engineering-defined seam.
 
-For a filled-in version of this flow, see [../examples/first-pilot/](../examples/first-pilot/).
+For a filled-in version of this flow, see [../examples/first-pilot/](../examples/first-pilot/). The example also includes two useful support files: an agent implementation plan and review learnings.
 
-If you want an agent to guide the setup, use [../skills/setup-code-left/](../skills/setup-code-left/).
+If you want an agent to guide the setup, use [../skills/setup-code-left/](../skills/setup-code-left/). That skill produces the three starter artifacts plus a first-pilot plan and a review-learnings placeholder.
 
 ## Step 1 - Assess the repo
 

@@ -57,7 +57,7 @@ Wait for confirmation before continuing.
 
 ## Phase 3 — Check for Existing Integration Points
 
-Before analysing candidates, check whether this project already has integration-point skills defined:
+Before analysing candidates, check whether this project already has integration-point skills defined. Resolve `<agent-config>` to the target project's actual agent skill path before running commands. If the path is unknown, inspect documented repo conventions first and note that existing integration-point skills were not found in a known location.
 
 ```bash
 ls <agent-config>/skills/integration-points/ 2>/dev/null || echo "none"
