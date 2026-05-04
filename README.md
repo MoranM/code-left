@@ -77,8 +77,8 @@ flowchart TB
     Learning["Update playbook"]
 
     Spec --> Mapping --> Decision
-    Decision -->|Yes| Plan --> Implementation --> Validation --> Review --> Learning
-    Decision -->|No| Missing
+    Decision -->|Yes| Plan --> Implementation --> Validation --> Review
+    Decision -->|No| Missing --> Learning
     Learning -.-> Mapping
 ```
 
