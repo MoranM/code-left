@@ -9,59 +9,6 @@ This repository is built around a simple premise: companies do not become AI-rea
 
 The core idea is **Code-Left**: engineering designs the system by which product intent enters production, so coding agents can implement safely through known seams instead of relying on feature-by-feature human translation.
 
-## Start Here
-
-If you are new to Code-Left, do not start by documenting everything. Start with one narrow pilot.
-
-### Use without cloning
-
-You do not need to clone this repo into your codebase.
-
-From your target repo, ask your coding agent to follow [NL-SPEC.md](NL-SPEC.md) using this repository as the source reference:
-
-```text
-I want to set up Code-Left in this repository.
-Use https://github.com/MoranM/code-left as the reference.
-Follow https://github.com/MoranM/code-left/blob/main/NL-SPEC.md.
-Do not clone the Code-Left repo into this codebase.
-Create a local Code-Left skills folder for this repo.
-Start by inspecting this repo and finding one strong integration-point candidate based on existing codebase conventions.
-Do not implement a product feature during setup.
-```
-
-### Engineering: make one safe seam
-
-Use this path when your main question is: "How do we let agents implement safely in our repo?"
-
-1. Read [docs/getting-started.md](docs/getting-started.md).
-2. Use [templates/engineering/repo-readiness-assessment.md](templates/engineering/repo-readiness-assessment.md) to choose one repeated, low-risk change type.
-3. Use [templates/engineering/integration-point-playbook-template.md](templates/engineering/integration-point-playbook-template.md) to document one safe integration point.
-4. Load one real product spec into the agent, or wrap it with [templates/engineering/change-package-template.md](templates/engineering/change-package-template.md) if the spec needs a clearer handoff shape.
-5. Have the agent map the spec or change package to available integration playbooks before implementation.
-6. Update the playbook when the agent exposes missing rules.
-
-### Product: make intent implementation-ready
-
-Use this path when your main question is: "How do we give agents and engineers better product context?"
-
-1. Read [docs/pm-framework/README.md](docs/pm-framework/README.md).
-2. Fill or link the three context layers in [templates/pm/](templates/pm/).
-3. Draft one bet brief with [templates/pm/bet-brief-template.md](templates/pm/bet-brief-template.md).
-4. Assess routing with [skills/pm/assess-work-item-complexity/](skills/pm/assess-work-item-complexity/).
-5. Create a technical spec with [templates/pm/technical-spec-template.md](templates/pm/technical-spec-template.md) when the work needs one.
-
-### Recommended first pilot
-
-For a full Code-Left pilot, combine both tracks:
-
-- Product creates one clear spec, bet brief, or change package.
-- Engineering creates one integration-point playbook.
-- The agent maps the product intent to available playbooks before implementation.
-- If the required playbook is missing, the agent stops and reports the missing integration coverage.
-- The team updates the playbook after review.
-
-For deeper adoption, see [docs/implementation-guide.md](docs/implementation-guide.md).
-
 ## How Code-Left Works
 
 ```mermaid
@@ -109,6 +56,62 @@ It contains:
 - Agent skills that encode repeatable workflows for product and engineering.
 
 The goal is not to replace engineers with agents. The goal is to help engineering teams package their judgment into systems, rules, contracts, and workflows that make agent-assisted implementation safer and more scalable.
+
+## Start Here
+
+If you are new to Code-Left, understand the model first, then install only the smallest useful flow.
+
+1. Read the operating model in [code-left.md](code-left.md), or start with the short pilot guide in [docs/getting-started.md](docs/getting-started.md).
+2. Review the filled-in example in [examples/first-pilot/](examples/first-pilot/).
+3. Install a local skills bundle using [NL-SPEC.md](NL-SPEC.md) when you are ready to try it in your repo.
+
+### Install In Your Repo
+
+You do not need to clone this repo into your codebase.
+
+From your target repo, ask your coding agent to follow [NL-SPEC.md](NL-SPEC.md) using this repository as the source reference:
+
+```text
+I want to set up Code-Left in this repository.
+Use https://github.com/MoranM/code-left as the reference.
+Follow https://github.com/MoranM/code-left/blob/main/NL-SPEC.md.
+Do not clone the Code-Left repo into this codebase.
+Create a local Code-Left skills folder for this repo.
+Start by inspecting this repo and finding one strong integration-point candidate based on existing codebase conventions.
+Do not implement a product feature during setup.
+```
+
+### Engineering: make one safe seam
+
+Use this path when your main question is: "How do we let agents implement safely in our repo?"
+
+1. Use [NL-SPEC.md](NL-SPEC.md) or [skills/setup-code-left/](skills/setup-code-left/) to install the local skills bundle.
+2. Let the setup flow create one `integrate` skill and one codebase-specific integration-point skill.
+3. Load one real product spec into the agent, or wrap it with [templates/engineering/change-package-template.md](templates/engineering/change-package-template.md) if the spec needs a clearer handoff shape.
+4. Have the agent map the spec or change package to available integration playbooks before implementation.
+5. Update the integration-point skill when review exposes missing rules.
+
+### Product: make intent implementation-ready
+
+Use this path when your main question is: "How do we give agents and engineers better product context?"
+
+1. Read [docs/pm-framework/README.md](docs/pm-framework/README.md).
+2. Fill or link the three context layers in [templates/pm/](templates/pm/).
+3. Draft one bet brief with [templates/pm/bet-brief-template.md](templates/pm/bet-brief-template.md).
+4. Assess routing with [skills/pm/assess-work-item-complexity/](skills/pm/assess-work-item-complexity/).
+5. Create a technical spec with [templates/pm/technical-spec-template.md](templates/pm/technical-spec-template.md) when the work needs one.
+
+### Recommended first pilot
+
+For a full Code-Left pilot, combine both tracks:
+
+- Product creates one clear spec, bet brief, or change package.
+- Engineering has at least one documented integration-point skill.
+- The agent maps the product intent to available playbooks before implementation.
+- If the required playbook is missing, the agent stops and reports the missing integration coverage.
+- The team updates the playbook after review.
+
+For deeper adoption, see [docs/implementation-guide.md](docs/implementation-guide.md).
 
 ## The Core Thesis
 
