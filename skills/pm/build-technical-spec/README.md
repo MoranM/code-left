@@ -4,6 +4,8 @@ Turns a **bet brief** (or org equivalent) into a **standalone technical specific
 
 **Team templates:** Use your org’s technical spec outline when you have one; [`technical-spec-template.md`](../../../templates/pm/technical-spec-template.md) is the Code-Left **reference / gap-check** shape.
 
+The resulting spec can be loaded into an implementation agent directly, or wrapped in an engineering change package when the handoff needs a shorter agent-facing artifact. The agent should map the spec or package against available integration-point playbooks before implementation.
+
 ## When to use
 
 - After a bet brief exists (preferred) or with explicit intent for spec-only mode.

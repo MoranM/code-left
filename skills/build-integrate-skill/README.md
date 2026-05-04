@@ -22,7 +22,9 @@ In many repositories, those answers live in senior engineers' heads. A Code-Left
 
 ## The Orchestration Concept
 
-An integration orchestrator is the agent-facing workflow that turns a product change package into a safe production change.
+An integration orchestrator is the agent-facing workflow that turns a product spec or change package into a safe production change.
+
+A change package is the thin agent-facing wrapper around product intent. It should either link to the product spec or embed the product spec directly. It should not create a second source of truth.
 
 It is responsible for:
 
@@ -30,11 +32,12 @@ It is responsible for:
 2. Extracting the essence of the requested change in product terms.
 3. Classifying the change into one or more known integration point types.
 4. Loading the relevant playbooks for those integration points.
-5. Producing a dependency-ordered implementation plan.
-6. Asking for confirmation before code changes begin.
-7. Executing only through allowed seams and approved abstractions.
-8. Running the repository's required validation and review policy.
-9. Reporting what changed, how to test it, and what still needs review.
+5. Stopping with a missing-playbook report if required playbooks do not exist.
+6. Producing a dependency-ordered implementation plan only when the needed playbooks are available.
+7. Asking for confirmation before code changes begin.
+8. Executing only through allowed seams and approved abstractions.
+9. Running the repository's required validation and review policy.
+10. Reporting what changed, how to test it, and what still needs review.
 
 The orchestrator is the bridge between PM-owned intent, agent-owned execution, and engineer-owned safe integration.
 
@@ -116,10 +119,11 @@ A strong integration orchestrator usually follows this phase model:
 3. **Collect the source:** Ask where the product intent lives.
 4. **Explore the source:** Summarize user outcome, flows, data, side effects, UI surfaces, and operational implications.
 5. **Map to integration points:** Dynamically discover playbooks and explain which apply or do not apply.
-6. **Plan execution:** Load selected playbooks and produce a dependency-ordered plan.
-7. **Execute through seams:** Modify only approved areas and stop on missing primitives or unclear policy.
-8. **Run quality gates:** Execute the repo's required validation and review checks.
-9. **Report completion:** Summarize changes, testing steps, rollout state, review path, and known gaps.
+6. **Check playbook coverage:** Stop with a missing-playbook report if required playbooks are not available.
+7. **Plan execution:** Load selected playbooks and produce a dependency-ordered plan.
+8. **Execute through seams:** Modify only approved areas and stop on missing primitives or unclear policy.
+9. **Run quality gates:** Execute the repo's required validation and review checks.
+10. **Report completion:** Summarize changes, testing steps, rollout state, review path, and known gaps.
 
 ## What Good Looks Like
 
@@ -129,6 +133,7 @@ A good generated orchestrator makes agent behavior predictable. It should:
 - Use dynamic discovery instead of hardcoded integration-point lists.
 - Require user confirmation before code changes.
 - Treat engineering rules as mandatory, not suggestions.
+- Stop instead of inventing implementation paths when no documented playbook covers the requested change.
 - Define explicit stop conditions for ambiguity and architectural risk.
 - Route high-risk changes to review instead of forcing autonomous implementation.
 - Improve over time when agents struggle or reviewers find recurring mistakes.
@@ -139,6 +144,7 @@ Before using the generated orchestrator for real production work, confirm:
 
 - The repo has at least one clear integration point or a narrow first change class.
 - The orchestrator knows where to find integration-point playbooks.
+- Missing playbooks produce a report instead of improvised implementation.
 - The workflow distinguishes safe local decisions from escalation triggers.
 - Validation commands are exact and runnable in the target repo.
 - The completion report includes changed files, test steps, rollout notes, known gaps, and review path.

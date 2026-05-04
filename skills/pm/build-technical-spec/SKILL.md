@@ -9,6 +9,8 @@ description: Converts a bet brief into a standalone technical spec using the tea
 
 Translate product intent (prefer `bet-brief.md` or org equivalent; **spec-only** mode when the brief is absent) into a rigorous, standalone technical spec—often `Technical Spec.md`—that defines how the feature is built and can be implemented **without** opening the brief for implementation-critical behavior.
 
+The completed spec can be loaded into an implementation agent directly, or wrapped in an engineering change package when the handoff needs a shorter agent-facing artifact. Implementation agents should map the spec or package against available integration-point playbooks before writing code.
+
 **Team spec template:** If the org provides a technical-spec / architecture doc template, **follow its headings and file naming** as the structure of record. Always read [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md) as a **gap check** so nothing critical is missing (especially standalone product contract, testable FRs, and UX-derived acceptance criteria).
 
 The spec must carry enough **bet context** in `## Context from the bet` (or the org’s equivalent section title) that implementers understand why the work matters—not only what to type.

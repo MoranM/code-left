@@ -20,8 +20,8 @@ Use this path when your main question is: "How do we let agents implement safely
 1. Read [docs/getting-started.md](docs/getting-started.md).
 2. Use [templates/engineering/repo-readiness-assessment.md](templates/engineering/repo-readiness-assessment.md) to choose one repeated, low-risk change type.
 3. Use [templates/engineering/integration-point-playbook-template.md](templates/engineering/integration-point-playbook-template.md) to document one safe integration point.
-4. Use [templates/engineering/change-package-template.md](templates/engineering/change-package-template.md) to package one real request.
-5. Run one agent-assisted change through that playbook.
+4. Load one real product spec into the agent, or wrap it with [templates/engineering/change-package-template.md](templates/engineering/change-package-template.md) if the spec needs a clearer handoff shape.
+5. Have the agent map the spec or change package to available integration playbooks before implementation.
 6. Update the playbook when the agent exposes missing rules.
 
 ### Product: make intent implementation-ready
@@ -38,9 +38,10 @@ Use this path when your main question is: "How do we give agents and engineers b
 
 For a full Code-Left pilot, combine both tracks:
 
-- Product creates one clear change package or bet brief.
+- Product creates one clear spec, bet brief, or change package.
 - Engineering creates one integration-point playbook.
-- The agent implements only through that playbook.
+- The agent maps the product intent to available playbooks before implementation.
+- If the required playbook is missing, the agent stops and reports the missing integration coverage.
 - The team updates the playbook after review.
 
 For deeper adoption, see [docs/implementation-guide.md](docs/implementation-guide.md).
@@ -61,17 +62,20 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    Brief["Brief or change package"]
-    Complexity["Complexity check"]
-    Spec["Technical spec<br/>when needed"]
-    Playbook["Integration playbook"]
-    Implementation["Agent implementation"]
+    Spec["Product spec or<br/>change package"]
+    Mapping["Map to integration points"]
+    Decision{"Required playbooks found?"}
+    Plan["Implementation plan"]
+    Missing["Missing-playbook report"]
+    Implementation["Execute through playbooks"]
     Validation["Validation"]
     Review["Review and rollout"]
     Learning["Update playbook"]
 
-    Brief --> Complexity --> Spec --> Playbook --> Implementation --> Validation --> Review --> Learning
-    Learning -.-> Playbook
+    Spec --> Mapping --> Decision
+    Decision -->|Yes| Plan --> Implementation --> Validation --> Review --> Learning
+    Decision -->|No| Missing
+    Learning -.-> Mapping
 ```
 
 ## Repo Map
@@ -118,7 +122,7 @@ Code-Left externalizes that knowledge into practical assets:
 
 - architecture rules
 - extension-point playbooks
-- product change packages
+- product specs or change packages
 - agent instruction sets
 - validation checklists
 - escalation policies
@@ -190,11 +194,12 @@ Useful starting skills:
 
 1. Choose one high-repetition, low-risk change type.
 2. Document the allowed integration point.
-3. Package one real change.
-4. Run an agent-assisted implementation through the playbook.
-5. Define validation and review rules only when the pilot shows they need to be explicit.
-6. Convert repeated mistakes into stronger rules, templates, or checks.
-7. Expand to the next change type.
+3. Provide one real product spec, or wrap it in a change package.
+4. Have the agent map the spec or package to available playbooks before implementation.
+5. Stop if the required playbook is missing instead of inventing an implementation path.
+6. Define validation and review rules only when the pilot shows they need to be explicit.
+7. Convert repeated mistakes into stronger rules, templates, or checks.
+8. Expand to the next change type.
 
 ### Product and context
 

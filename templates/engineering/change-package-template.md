@@ -1,68 +1,25 @@
 # Change package: [name]
 
-Use this template to package one real request for a Code-Left pilot.
+Use this template as the thin agent-facing wrapper around product intent.
 
-## Goal
+The change package should not create a second source of truth. It should either link to the product spec or contain the product spec directly.
 
-What user or business outcome should change?
+Use one of two modes:
 
-## Requested behavior
+- **Linked spec:** the product spec, PRD, ticket, prototype, bet brief, or technical spec lives elsewhere and this file links to it.
+- **Embedded spec:** this file contains the product spec directly.
 
-Describe the intended behavior concretely.
+## Source spec
 
-## Acceptance criteria
+Use one mode.
 
-List observable success conditions.
+- Mode: [Linked spec / Embedded spec]
+- Type: [spec / PRD / ticket / prototype / bet brief / technical spec / other]
+- Link or path: [required for linked spec; optional for embedded spec]
+- Owner: [person/team]
 
-- [criterion]
-- [criterion]
+## Product spec
 
-## Non-goals
+Use this section only when the spec is embedded in this file. If the spec is linked above, replace this section with a short pointer such as: "See linked source spec."
 
-What is intentionally out of scope?
-
-- [non-goal]
-- [non-goal]
-
-## Edge cases
-
-What tricky cases must be handled?
-
-- [edge case]
-- [edge case]
-
-## References
-
-Link or describe relevant specs, screenshots, prototypes, existing flows, tickets, or examples.
-
-- [reference]
-- [reference]
-
-## Suspected integration point
-
-Best guess: [page / endpoint / worker / event handler / workflow extension / admin tool / other]
-
-Why this integration point seems right:
-
-[short explanation]
-
-## Data and permissions
-
-Relevant data, roles, access rules, privacy constraints, or policy constraints.
-
-- [constraint]
-- [constraint]
-
-## Rollout notes
-
-Feature flags, staged rollout, migration, monitoring, rollback, or launch notes.
-
-- [note]
-- [note]
-
-## Open questions
-
-Unknowns that must be resolved before implementation.
-
-- [question]
-- [question]
+When embedding the spec here, use the canonical PM technical spec shape in [../pm/technical-spec-template.md](../pm/technical-spec-template.md). Do not duplicate or fork that template in this file.

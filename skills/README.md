@@ -19,7 +19,7 @@ Templates these skills reference: [../templates/pm/](../templates/pm/). Concept 
 
 | Skill | Path | Use when |
 | --- | --- | --- |
-| **setup-code-left** | [setup-code-left/](setup-code-left/) | Creating the first Code-Left pilot package: readiness assessment, playbook, change package, and pilot plan. |
+| **setup-code-left** | [setup-code-left/](setup-code-left/) | Creating the first Code-Left pilot package: readiness assessment, playbook, spec/change-package wrapper, and pilot plan. |
 | **map-integration-candidates** | [map-integration-candidates/](map-integration-candidates/) | Scanning a codebase for strong integration-point candidates before writing recipe skills. |
 | **build-integrate-skill** | [build-integrate-skill/](build-integrate-skill/) | Creating a project-specific **integration orchestrator** skill (similar to an `/integrate` flow) for your repo. |
 

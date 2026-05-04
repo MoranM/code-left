@@ -7,7 +7,7 @@ It does not implement product features. It helps create the operating artifacts 
 - one repo readiness assessment
 - one selected pilot change type
 - one integration-point playbook
-- one change package for a real request
+- one real product spec or change package wrapper for agent handoff
 - one recommended agent execution path
 - one feedback loop for review learnings
 
@@ -50,3 +50,7 @@ The exact path can vary. The important part is that the package is easy for prod
 `build-integrate-skill` creates a reusable integration orchestrator skill after the team knows which playbooks and validation rules should drive implementation.
 
 In most teams, use `setup-code-left` first.
+
+## Missing playbook rule
+
+The setup flow should make missing integration coverage visible. If a product spec cannot be mapped to an available integration-point playbook, the agent should stop and report the missing playbook instead of inventing an implementation path.

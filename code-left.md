@@ -239,13 +239,15 @@ A good code-left artifact defines a change.
 
 ## 3. The default code-left workflow
 
-### Step 1: PM creates the change package
+### Step 1: Product provides the spec or change package
 
-The PM creates a spec, POC, or hybrid package that captures the intended behavior.
+Product provides the spec, PRD, ticket, prototype, or technical spec that captures the intended behavior.
 
-### Step 2: Agent classifies the change
+When the source artifact is too broad or not shaped for agent handoff, product or engineering wraps it in a **change package**. The change package is the thin agent-facing wrapper around product intent. It either links to the product spec or embeds the product spec directly; it should not create a second source of truth.
 
-The agent determines whether the request is primarily:
+### Step 2: Agent maps the intent to integration points
+
+The agent reads the spec or change package and determines whether the request maps to available integration-point playbooks, such as:
 
 - a new page
 - an extension of an existing flow
@@ -254,9 +256,13 @@ The agent determines whether the request is primarily:
 - a new endpoint
 - a cross-cutting change that needs escalation
 
-### Step 3: Agent selects the integration playbook
+### Step 3: Agent checks playbook coverage
 
-Once the change type is known, the agent loads the relevant rule set and instruction pack.
+Once the change type is known, the agent checks whether the required integration playbooks exist.
+
+If the playbooks exist, the agent loads the relevant rule sets and instruction packs.
+
+If a required playbook is missing, the agent stops and reports the missing integration coverage. It does not invent an implementation path outside documented seams.
 
 ### Step 4: Agent extracts the essence
 
@@ -268,11 +274,15 @@ For example:
 - new capability vs variant of existing capability
 - local change vs architecture-level change
 
-### Step 5: Agent integrates only through allowed Integration points
+### Step 5: Agent creates an implementation plan
+
+The agent produces an implementation plan tied to the selected playbooks, expected files, validation commands, and escalation triggers.
+
+### Step 6: Agent integrates only through allowed integration points
 
 The agent modifies the system through known insertion points and approved abstractions.
 
-### Step 6: Agent runs required validations
+### Step 7: Agent runs required validations
 
 At minimum, this usually includes:
 
@@ -282,7 +292,7 @@ At minimum, this usually includes:
 - lint and formatting
 - required telemetry hooks
 
-### Step 7: Agent decides review path
+### Step 8: Agent decides review path
 
 Based on change type and policy, the result either:
 
@@ -291,7 +301,7 @@ Based on change type and policy, the result either:
 - routes to product review (Level 4)
 - routes to architecture escalation
 
-### Step 8: Learn and strengthen
+### Step 9: Learn and strengthen
 
 If the agent struggled, violated a pattern, or needed repeated correction, engineering improves the playbook.
 
@@ -557,34 +567,42 @@ Higher-leverage engineering.
 
 ## Appendix: A reusable change package template
 
-### 1. Goal
+A change package is the thin agent-facing wrapper around product intent. It should either link to the product spec or embed the product spec directly. It should not create a second source of truth.
+
+If no documented integration-point playbook covers the required change, the agent should stop and report the missing playbook instead of inventing an implementation path.
+
+### 1. Source spec
+
+State whether the product spec is linked or embedded.
+
+### 2. Goal
 
 What user or business outcome should change?
 
-### 2. Requested behavior
+### 3. Requested behavior
 
 Describe the intended behavior concretely.
 
-### 3. Acceptance criteria
+### 4. Acceptance criteria
 
 List observable criteria for success.
 
-### 4. Non-goals
+### 5. Non-goals
 
 What is intentionally out of scope?
 
-### 5. Edge cases
+### 6. Edge cases
 
 What tricky cases must be handled?
 
-### 6. Relevant references
+### 7. Relevant references
 
 Existing flows, components, screenshots, or POCs.
 
-### 7. Suspected integration point
+### 8. Suspected integration point
 
 If known: page, worker, event handler, endpoint, workflow extension, other.
 
-### 8. Rollout notes
+### 9. Rollout notes
 
 Any feature flags, limited rollout expectations, or operational concerns.

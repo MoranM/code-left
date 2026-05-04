@@ -56,7 +56,9 @@ The playbook should be specific enough that an agent can identify the right impl
 
 ## 3. Package product intent
 
-Product intent should arrive as a change package, product brief, technical spec, prototype, or ticket with enough structure to drive implementation.
+Product intent should arrive as a product spec or a change package with enough structure to drive implementation.
+
+A **change package** is the thin agent-facing wrapper around product intent. It should either link to the product spec or embed the product spec directly. It should not create a second source of truth.
 
 At minimum, include:
 
@@ -69,7 +71,9 @@ At minimum, include:
 - suspected integration point
 - data, permissions, and rollout notes when relevant
 
-Use [../templates/engineering/change-package-template.md](../templates/engineering/change-package-template.md) for engineering-facing requests, and [../templates/pm/](../templates/pm/) when the work needs product bet context or a full technical spec.
+Use [../templates/engineering/change-package-template.md](../templates/engineering/change-package-template.md) when the existing product spec needs a clearer handoff shape. Use [../templates/pm/](../templates/pm/) when the work needs product bet context or a full technical spec.
+
+Before implementation, the agent should map the spec or change package to available integration-point playbooks. If no documented playbook covers the required change, the agent should stop and report the missing integration coverage instead of inventing an implementation path.
 
 ## 4. Define validation as part of the workflow
 

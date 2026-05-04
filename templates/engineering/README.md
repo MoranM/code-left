@@ -10,15 +10,15 @@ Start with only three files. The optional templates are useful later, but they s
 | --- | --- |
 | [repo-readiness-assessment.md](repo-readiness-assessment.md) | Choosing the first repeated, low-risk change type to pilot. |
 | [integration-point-playbook-template.md](integration-point-playbook-template.md) | Documenting one safe seam agents can use. |
-| [change-package-template.md](change-package-template.md) | Packaging one real request so the playbook can be tested. |
+| [change-package-template.md](change-package-template.md) | Wrapping one real product spec or request so the playbook can be tested. |
 
 ## Simple setup flow
 
 1. Fill the readiness assessment.
 2. Pick one pilot change type.
 3. Fill one integration-point playbook for that change type.
-4. Fill one change package for a real request.
-5. Run one agent-assisted implementation through the playbook.
+4. Provide one real product spec, or wrap it in a change package.
+5. Have the agent map the spec or package to available playbooks before implementation.
 6. Update the playbook based on where the agent guessed or got stuck.
 
 ## Use later

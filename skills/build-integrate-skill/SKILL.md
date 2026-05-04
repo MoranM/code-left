@@ -70,9 +70,11 @@ Before writing the skill, define the contract in plain language:
 
 **Purpose:** What kind of work this orchestrator handles.
 
-**Inputs:** What the user can provide, such as a local prototype path, GitHub URL, PR, product brief, pasted spec, screenshot, Figma link, or issue.
+**Inputs:** What the user can provide, such as a product spec, change package, local prototype path, GitHub URL, PR, product brief, pasted spec, screenshot, Figma link, or issue.
 
 **Recipe source:** Where the orchestrator discovers implementation recipes.
+
+**Missing-playbook policy:** What the orchestrator reports when a spec cannot be mapped to documented playbooks.
 
 **Decision gates:** Where the agent must stop for user confirmation.
 
@@ -105,7 +107,7 @@ You are the **Integration Orchestrator** for [project name]. Your job is to guid
 [Read foundation, coding rules, design system, architecture docs, and safety invariants.]
 
 ## Phase 3 — Collect the Source
-[Ask where the spec/prototype/brief lives and accept supported input types.]
+[Ask where the spec/change package/prototype/brief lives and accept supported input types.]
 
 ## Phase 4 — Explore the Source
 [Understand user-facing outcome, flows, data, dependencies, async work, and UI surfaces.]
@@ -113,16 +115,19 @@ You are the **Integration Orchestrator** for [project name]. Your job is to guid
 ## Phase 5 — Map to Integration Points
 [Discover recipe files dynamically. Present recommended and not-needed recipes. Ask for confirmation.]
 
-## Phase 6 — Load Relevant Recipes
+## Phase 6 — Check Playbook Coverage
+[If required playbooks are missing, stop and report the missing integration coverage. Do not invent an implementation path.]
+
+## Phase 7 — Load Relevant Recipes
 [Read selected recipes. Present a sequenced execution plan. Ask for final confirmation.]
 
-## Phase 7 — Execute
+## Phase 8 — Execute
 [Follow selected recipes in dependency order. Narrate progress. Stop on unresolved gaps.]
 
-## Phase 8 — Quality Gate
+## Phase 9 — Quality Gate
 [Run required typecheck, tests, lint, format, build, migration checks, or manual verification.]
 
-## Phase 9 — Completion Summary
+## Phase 10 — Completion Summary
 [Report branch, changes, flags/config, testing steps, known gaps, and next steps.]
 ```
 
@@ -137,6 +142,7 @@ Every integration orchestrator should include these rules unless the target proj
 - **Dynamic recipe discovery:** List recipe files from the repository at runtime. Do not hardcode a stale catalog.
 - **No code before confirmation:** Source exploration and mapping happen before implementation begins.
 - **User-visible mapping:** Show why each recipe applies or does not apply.
+- **No invented implementation paths:** If the spec or change package cannot be mapped to documented playbooks, stop and report the missing integration coverage.
 - **Dependency-ordered plan:** Execute foundational changes before dependent work.
 - **Stop on missing primitives:** If the prototype needs a UI component, service, permission, schema, or platform capability that does not exist, stop and ask.
 - **Quality gate before completion:** Run the target project's validation checks and fix failures.

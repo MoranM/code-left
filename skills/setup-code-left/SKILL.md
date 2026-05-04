@@ -1,6 +1,6 @@
 ---
 name: setup-code-left
-description: Guides a team through the first Code-Left setup for a target repo or product area. Use when creating one readiness assessment, one pilot integration-point playbook, one change package, and a first agent-assisted implementation path.
+description: Guides a team through the first Code-Left setup for a target repo or product area. Use when creating one readiness assessment, one pilot integration-point playbook, one product spec or change package wrapper, and a first agent-assisted implementation path.
 ---
 
 # Setup Code-Left
@@ -147,14 +147,17 @@ Use concrete repo paths and commands when known. Use `[UNKNOWN]` only when the i
 
 ---
 
-## Phase 7 - Draft One Change Package
+## Phase 7 - Draft or Wrap One Product Spec
 
-Create one change package based on `templates/engineering/change-package-template.md`.
+Create one change package based on `templates/engineering/change-package-template.md`, or wrap an existing product spec in that shape.
 
-If the user has a real request, use it. If not, create a clearly labeled example request that fits the selected pilot and mark it as replaceable.
+A change package is the thin agent-facing wrapper around product intent. It should either link to the product spec or embed the product spec directly. It should not create a second source of truth.
+
+If the user has a real product spec or request, use it. If not, create a clearly labeled example request that fits the selected pilot and mark it as replaceable.
 
 The package must include:
 
+- source spec mode and reference
 - goal
 - requested behavior
 - acceptance criteria
@@ -176,11 +179,14 @@ The plan must include:
 
 - selected integration point
 - why the playbook applies
+- missing-playbook check
 - escalation check
 - files or examples to read first
 - proposed implementation sequence
 - validation commands
 - expected completion report
+
+If the spec or change package cannot be mapped to an available integration-point playbook, the first-pilot plan must stop and report the missing playbook. Do not invent an implementation path outside documented repo seams.
 
 If the team is ready for a reusable integration orchestrator, recommend running `build-integrate-skill`. Otherwise, say to run one or two pilots manually first.
 
@@ -207,7 +213,7 @@ End with:
 - files created or drafted
 - selected pilot change type
 - missing information marked `[UNKNOWN]`
-- how to run the first agent-assisted change
+- how to load the spec or change package into the agent and map it to playbooks
 - whether to use `build-integrate-skill` now or later
 
 Do not claim the repo is Code-Left ready after one setup pass. Say it has a first pilot package and should improve through review learnings.

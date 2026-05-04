@@ -22,6 +22,8 @@ For how the **product role** shifts (bets, context, collaboration)—and a stub 
 
 The **bet brief** (product intent) gathers the context needed to **evaluate the bet**: who it is for, the hypothesis, evidence, scope, and success signals—without turning into an engineering design. The **technical spec** gathers what is needed to **plan and build safely**: requirements, contracts, edge cases, and testable behavior an implementer can execute without re-opening the brief for every ambiguity.
 
+For agent-assisted implementation, the product spec or technical spec is loaded into the agent directly, or wrapped in an engineering change package when the handoff needs a clearer shape. The agent then maps that product intent against available integration-point playbooks before producing an implementation plan.
+
 ## Templates
 
 Canonical **reference** copies live under [`../../templates/pm/`](../../templates/pm/). Most products already have their own brief, PRD, or technical-spec shapes—use those as the working artifacts and treat Code-Left templates as a **gap check** and refinement guide, not a mandatory replacement. Teams typically:
@@ -49,6 +51,7 @@ Then use **build-product-brief** to tighten the bet, run a quick **assess-work-i
 3. Use **build-product-brief** to draft or refine a **bet brief** (or your org’s equivalent) from those sources.
 4. Use **assess-work-item-complexity** to route the bet (agent vs PM vs engineering).
 5. Use **build-technical-spec** when you need an implementation-ready spec (using your org’s spec template when you have one).
+6. Hand the spec to the implementation agent directly, or wrap it in a change package when the agent needs a shorter handoff artifact.
 
 ## Relation to Code-Left engineering assets
 

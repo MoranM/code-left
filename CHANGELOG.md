@@ -20,6 +20,7 @@ This project follows a lightweight version of [Keep a Changelog](https://keepach
 
 - Normalized agent terminology to avoid tying core docs to one tool.
 - Replaced hardcoded tool-specific skill paths with `<agent-config>/skills/...`.
+- Clarified that a change package is the agent-facing wrapper around product intent, and that agents should stop when required integration playbooks are missing.
 
 ### Fixed
 

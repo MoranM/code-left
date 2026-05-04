@@ -1,12 +1,76 @@
 # Change package: Failed webhook deliveries admin page
 
-## Goal
+This package embeds the product spec in the shape the coding agent should use for integration mapping and implementation planning.
+
+It should not be treated as a second source of truth. In this example, the product spec lives directly in this file.
+
+## Source spec
+
+- Mode: Embedded spec
+- Type: Support ticket converted into embedded product spec
+- Link or path: SUPPORT-1427
+- Owner: Support operations
+
+## Product spec
+
+This embedded spec follows the canonical PM technical spec shape from [../../templates/pm/technical-spec-template.md](../../templates/pm/technical-spec-template.md).
+
+### Context from the bet
+
+- **Bet name and one-line value hypothesis:** Failed webhook delivery visibility will reduce support dependence on engineering for routine webhook failure investigation.
+- **Primary users and non-goals:** Support admins need inspection and single-delivery retry. Bulk retry, new backend endpoints, and customer-facing UI are out of scope.
+- **Links:** SUPPORT-1427
 
 Support staff need a faster way to inspect failed webhook deliveries and retry a single delivery without asking engineering to query logs.
 
-## Requested behavior
+### Standalone product contract (v1)
 
-Add an internal admin page that lists recent failed webhook deliveries.
+- **Scope ownership:** Internal admin support surface owns the page.
+- **Feature flag or rollout:** Route exists but is hidden from primary admin navigation until product review.
+- **Primary entities and rules:** Failed webhook deliveries are read from existing backend data. Retry acts on one delivery at a time.
+- **Ordering and defaults:** Show recent failed deliveries. Empty, loading, error, retry success, and retry failure states are required.
+- **API or integration contracts:** Use existing `POST /admin/webhook-deliveries/:id/retry` endpoint.
+- **Explicit v1 non-goals:** No bulk retry, no new backend endpoint, no new permission role, no customer-facing UI, no retry scheduling changes.
+- **Requirement vs recommendation:** Acceptance criteria and functional requirements are mandatory for v1.
+
+### User scenarios and testing
+
+#### User story 1 - Inspect failed webhook deliveries (Priority: P1)
+
+Support staff need a faster way to inspect failed webhook deliveries without asking engineering to query logs.
+
+**Why this priority:** It removes a frequent manual support-to-engineering handoff.
+
+**Independent test:** Open the hidden admin route as a support admin and verify the table states.
+
+**Acceptance scenarios:**
+
+1. **Given** failed deliveries exist, **When** a support admin opens the page, **Then** the table lists recent failed webhook deliveries.
+2. **Given** no failed deliveries exist, **When** a support admin opens the page, **Then** an empty state is shown.
+
+#### User story 2 - Retry one failed delivery (Priority: P1)
+
+Support staff need to retry a single failed delivery from the row action menu.
+
+**Why this priority:** It resolves common webhook delivery failures without engineering intervention.
+
+**Independent test:** Trigger retry from one row and verify success and failure states.
+
+**Acceptance scenarios:**
+
+1. **Given** a retryable failed delivery, **When** a support admin clicks retry, **Then** the existing retry endpoint is called and success is visible.
+2. **Given** retry fails, **When** the retry endpoint returns an error, **Then** failure is visible and the page remains usable.
+
+### Edge cases
+
+- No failed deliveries exist.
+- Retry endpoint returns a validation error.
+- Retry endpoint returns a transient server error.
+- Delivery was already retried by another support user.
+
+### Requirements
+
+#### Functional requirements
 
 The page should show:
 
@@ -18,59 +82,31 @@ The page should show:
 - next retry time, if any
 - retry status
 
-Support staff should be able to retry one failed delivery from the row action menu.
+- **FR-001:** A support admin MUST be able to open the page from the hidden admin route.
+- **FR-002:** The page MUST show loading, empty, populated, and error states.
+- **FR-003:** The table MUST list recent failed webhook deliveries.
+- **FR-004:** Clicking retry MUST call the existing retry endpoint for one delivery.
+- **FR-005:** Retry success and retry failure MUST be visible to the user.
+- **FR-006:** The route MUST NOT be added to primary admin navigation yet.
 
-## Acceptance criteria
+#### Key entities
 
-- A support admin can open the page from the hidden admin route.
-- The page shows loading, empty, populated, and error states.
-- The table lists recent failed webhook deliveries.
-- Clicking retry calls the existing retry endpoint for one delivery.
-- Retry success and retry failure are visible to the user.
-- The route is not added to primary admin navigation yet.
+- **Webhook delivery:** Existing backend record representing one attempted webhook delivery.
+- **Support admin:** Existing internal role allowed to inspect support admin pages.
 
-## Non-goals
+### Success criteria
 
-- No bulk retry.
-- No new webhook delivery backend endpoint.
-- No new permission role.
-- No customer-facing UI.
-- No changes to retry scheduling policy.
+- **SC-001:** Support can inspect recent failed webhook deliveries without engineering help.
+- **SC-002:** Support can retry one failed delivery through the existing retry endpoint.
 
-## Edge cases
+### Definition of done
 
-- No failed deliveries exist.
-- Retry endpoint returns a validation error.
-- Retry endpoint returns a transient server error.
-- Delivery was already retried by another support user.
+- [ ] Admin page tests cover loading, empty, populated, error, retry success, and retry failure states.
+- [ ] Existing admin audit event is emitted when retry is clicked.
+- [ ] Route is hidden from primary admin navigation.
+- [ ] Product reviews table columns and empty state copy.
 
-## References
-
-- Existing admin page pattern: `src/admin/pages/UserLookupPage.tsx`
-- Existing table pattern: `src/admin/pages/InvoiceSearchPage.tsx`
-- Existing retry endpoint: `POST /admin/webhook-deliveries/:id/retry`
-- Internal support request: SUPPORT-1427
-
-## Suspected integration point
-
-New internal admin page.
-
-This request fits the admin page playbook because it adds a bounded internal screen using existing admin layout, permissions, and backend APIs.
-
-## Data and permissions
-
-- Requires existing `support_admin` role.
-- Destination URL should display host only, not full path or query string.
-- Customer name may be shown because existing admin pages already expose it to support admins.
-- Audit event is required when retry is clicked.
-
-## Rollout notes
-
-- Add the route but keep it hidden from primary admin navigation.
-- Support lead will test the direct URL before navigation is added.
-- Monitor retry error rate after launch.
-
-## Open questions
+### Remaining clarifications (non-blocking)
 
 - Confirm final empty state copy with product.
 - Confirm whether failure reason should be raw enum or friendly label.

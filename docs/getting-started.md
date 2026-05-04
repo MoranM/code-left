@@ -8,7 +8,7 @@ The first pilot has three artifacts:
 
 1. A repo readiness assessment.
 2. One integration-point playbook.
-3. One change package for a real request.
+3. One real product spec, or a change package that wraps the product spec for agent handoff.
 
 Those three files are enough to test whether product intent can move toward production through an engineering-defined seam.
 
@@ -47,11 +47,13 @@ The playbook should answer the questions an engineer normally answers from memor
 
 Keep the first playbook short. It only needs to be good enough for one real pilot.
 
-## Step 3 - Package one real request
+## Step 3 - Provide one real spec or change package
 
 Use [../templates/engineering/change-package-template.md](../templates/engineering/change-package-template.md).
 
-The change package should describe one concrete request, not a broad initiative. Include goal, requested behavior, acceptance criteria, non-goals, edge cases, references, suspected integration point, and rollout notes if relevant.
+The change package is the thin agent-facing wrapper around product intent. It should either link to the product spec or embed the product spec directly. Do not create a second source of truth.
+
+Use the template when the existing spec does not clearly expose the goal, requested behavior, acceptance criteria, non-goals, edge cases, references, suspected integration point, and rollout notes.
 
 ## Step 4 - Run one agent-assisted change
 
@@ -63,6 +65,8 @@ Give the agent:
 - the validation commands
 
 Ask the agent to classify the change, explain why the playbook applies, produce a short implementation plan, and stop before editing if the playbook is missing required information.
+
+If the spec cannot be mapped to an available integration-point playbook, the agent should stop and report the missing playbook. It should not invent a new implementation path outside documented repo seams.
 
 Agent skill files in this repo are portable markdown instruction sets. Source copies live under [../skills/](../skills/). If your agent tool expects a different location, copy or adapt them into its configured path, such as `<agent-config>/skills/...`.
 
