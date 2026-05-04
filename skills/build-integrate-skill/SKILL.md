@@ -27,8 +27,8 @@ Then ask:
 
 > **Where should I write the result?**
 >
-> 1. `/.claude/skills/integrate/SKILL.md`
-> 2. `/.claude/skills/<new-name>/SKILL.md`
+> 1. `<agent-config>/skills/integrate/SKILL.md`
+> 2. `<agent-config>/skills/<new-name>/SKILL.md`
 > 3. Draft it inline first
 
 If the user already gave enough direction, proceed without asking.
@@ -40,8 +40,8 @@ If the user already gave enough direction, proceed without asking.
 Map the target project's skill structure before drafting:
 
 ```bash
-ls .claude/skills 2>/dev/null || true
-ls .claude/skills/integration-points 2>/dev/null || true
+ls <agent-config>/skills 2>/dev/null || true
+ls <agent-config>/skills/integration-points 2>/dev/null || true
 ```
 
 Read the files that define the current conventions:

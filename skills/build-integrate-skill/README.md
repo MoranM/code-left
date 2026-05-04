@@ -55,8 +55,8 @@ It is especially useful when:
 The output is usually a new skill directory for the target repository:
 
 ```text
-.claude/skills/integrate/SKILL.md
-.claude/skills/integrate/README.md
+<agent-config>/skills/integrate/SKILL.md
+<agent-config>/skills/integrate/README.md
 ```
 
 The generated `SKILL.md` is the operational workflow an agent follows when integrating a real feature.
@@ -105,7 +105,7 @@ Each integration point should eventually have its own playbook that defines:
 
 The orchestrator does not replace these playbooks. It discovers them, selects the relevant ones, sequences them, and enforces the stop points around them.
 
-Use the [map-integration-candidates](https://github.com/MoranM/code-left/blob/main/skills/map-integration-candidates/README.md) skill to locate a potential candidates for integration points in your codebase.
+Use the [map-integration-candidates](https://github.com/MoranM/code-left/blob/main/skills/map-integration-candidates/README.md) skill to locate potential candidates for integration points in your codebase.
 
 ## Generated Orchestrator Phases
 

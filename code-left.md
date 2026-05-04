@@ -288,7 +288,7 @@ Based on change type and policy, the result either:
 
 - auto-merges (Level 5)
 - routes to engineer review (Level 3)
-- routs to product review (Level 4)
+- routes to product review (Level 4)
 - routes to architecture escalation
 
 ### Step 8: Learn and strengthen

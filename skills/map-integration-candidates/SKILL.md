@@ -26,7 +26,7 @@ Ask the user these two questions before doing anything else:
 > Where should I deliver the report? (default: inline)
 >
 > 1. **Inline** — present it here in the conversation
-> 2. **File** — write it to `.claude/skills/integration-point-candidates.md` (or a path you specify)
+> 2. **File** — write it to `<agent-config>/skills/integration-point-candidates.md` (or a path you specify)
 > 3. **Both**
 
 Wait for the user's answers before proceeding.
@@ -60,7 +60,7 @@ Wait for confirmation before continuing.
 Before analysing candidates, check whether this project already has integration-point skills defined:
 
 ```bash
-ls .claude/skills/integration-points/ 2>/dev/null || echo "none"
+ls <agent-config>/skills/integration-points/ 2>/dev/null || echo "none"
 ```
 
 If the directory exists, read the first 5 lines of each file to capture its name and description. Keep this list — you'll use it in Phase 5 to mark already-covered areas.
@@ -166,10 +166,10 @@ For each area assessed and not recommended:
 
 **Inline**: present the full report in the conversation.
 
-**File**: write to `.claude/skills/integration-point-candidates.md` (or the path the user specified). Confirm the path after writing.
+**File**: write to `<agent-config>/skills/integration-point-candidates.md` (or the path the user specified). Confirm the path after writing.
 
 **Both**: present inline, then write the file.
 
 After delivering, close with:
 
-> "To turn any of these candidates into a usable integration-point skill, start a new session, share this report, and ask me to write the skill file for `[candidate name]`. The skill file should follow the same format as the files in `.claude/skills/integration-points/`."
+> "To turn any of these candidates into a usable integration-point skill, start a new session, share this report, and ask me to write the skill file for `[candidate name]`. The skill file should follow the same format as the files in your integration-point skill directory."

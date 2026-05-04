@@ -1,6 +1,6 @@
 # Skills in this repository
 
-Skills are markdown instruction sets for coding agents (and humans). Copy them into your agent config path if your tool expects a different layout (for example `.claude/skills/`).
+Skills are portable markdown instruction sets for coding agents (and humans). Source copies live in this repository under `skills/`. Copy or adapt them into the configured path used by your agent tool, such as `<agent-config>/skills/...`.
 
 ## PM framework — bets and context
 

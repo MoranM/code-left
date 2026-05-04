@@ -36,7 +36,7 @@ Typical signals (any strong signal can justify High):
 
 ## Integration-point mapping (optional)
 
-If your repository defines **integration-point playbooks** (for example under `.claude/skills/integration-points/` or another path your team documents):
+If your repository defines **integration-point playbooks** (for example under `<agent-config>/skills/integration-points/` or another path your team documents):
 
 1. List the recipe files that exist.
 2. If the work maps clearly to one or a small combination of recipes, cite them and score engineering with that preparedness in mind.

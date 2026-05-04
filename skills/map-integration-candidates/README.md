@@ -6,7 +6,7 @@ It acts as an "Integration Point Scout": it scans a chosen scope, evaluates each
 
 ## When To Use It
 
-Run this before writing a new file in `.claude/skills/integration-points/`.
+Run this before writing a new file in your integration-point skill directory, such as `<agent-config>/skills/integration-points/`.
 
 It is especially useful when:
 
@@ -51,4 +51,4 @@ The final report includes:
 - Areas ruled out and why.
 - Top-priority gaps to document first.
 
-If a candidate is selected for follow-up, use the report as input to author a dedicated integration-point skill file in `.claude/skills/integration-points/`.
+If a candidate is selected for follow-up, use the report as input to author a dedicated integration-point skill file in your configured agent skill path, such as `<agent-config>/skills/integration-points/`.

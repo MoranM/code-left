@@ -1,10 +1,46 @@
 # Code Left
 
-Skills, playbooks, and operating-model docs for helping companies become more AI-ready.
+Skills, playbooks, templates, and operating-model docs for helping teams become more AI-ready.
 
 This repository is built around a simple premise: companies do not become AI-ready by giving everyone a coding agent and hoping for the best. They become AI-ready by making product intent clearer, engineering knowledge more explicit, and production change safer to delegate.
 
-The core idea is **Code-Left**: engineering designs the system by which product intent enters production, so that coding agents can implement safely through known seams instead of relying on feature-by-feature human translation.
+The core idea is **Code-Left**: engineering designs the system by which product intent enters production, so coding agents can implement safely through known seams instead of relying on feature-by-feature human translation.
+
+## Start Here
+
+If you are new to Code-Left, do not start by documenting everything. Start with one narrow pilot.
+
+### Engineering: make one safe seam
+
+Use this path when your main question is: "How do we let agents implement safely in our repo?"
+
+1. Read [docs/getting-started.md](docs/getting-started.md).
+2. Use [templates/engineering/repo-readiness-assessment.md](templates/engineering/repo-readiness-assessment.md) to choose one repeated, low-risk change type.
+3. Use [templates/engineering/integration-point-playbook-template.md](templates/engineering/integration-point-playbook-template.md) to document one safe integration point.
+4. Use [templates/engineering/change-package-template.md](templates/engineering/change-package-template.md) to package one real request.
+5. Run one agent-assisted change through that playbook.
+6. Update the playbook when the agent exposes missing rules.
+
+### Product: make intent implementation-ready
+
+Use this path when your main question is: "How do we give agents and engineers better product context?"
+
+1. Read [docs/pm-framework/README.md](docs/pm-framework/README.md).
+2. Fill or link the three context layers in [templates/pm/](templates/pm/).
+3. Draft one bet brief with [templates/pm/bet-brief-template.md](templates/pm/bet-brief-template.md).
+4. Assess routing with [skills/pm/assess-work-item-complexity/](skills/pm/assess-work-item-complexity/).
+5. Create a technical spec with [templates/pm/technical-spec-template.md](templates/pm/technical-spec-template.md) when the work needs one.
+
+### Recommended first pilot
+
+For a full Code-Left pilot, combine both tracks:
+
+- Product creates one clear change package or bet brief.
+- Engineering creates one integration-point playbook.
+- The agent implements only through that playbook.
+- The team updates the playbook after review.
+
+For deeper adoption, see [docs/implementation-guide.md](docs/implementation-guide.md).
 
 ## What This Repo Is
 
@@ -12,18 +48,13 @@ This repo is a working library for teams that want to move from ad hoc AI usage 
 
 It contains:
 
-- Manifestos that define the operating model behind AI-assisted product development.
-- Playbooks for turning product specs, prototypes, and POCs into production-ready changes.
-- Templates for product briefs and technical specs.
-- Skills and rules that encode repeatable workflows for agents.
-- Course and training materials for PM and engineering collaboration.
-- Early notes on infrastructure and platform capabilities needed for AI-native software delivery.
+- A manifesto and playbook for the Code-Left operating model.
+- Product-side docs for turning ideas into clear bets.
+- Product templates for context, briefs, complexity checks, and technical specs.
+- Engineering templates for integration points, readiness, validation, and escalation.
+- Agent skills that encode repeatable workflows for product and engineering.
 
 The goal is not to replace engineers with agents. The goal is to help engineering teams package their judgment into systems, rules, contracts, and workflows that make agent-assisted implementation safer and more scalable.
-
-## Repo Description
-
-An AI-readiness toolkit for companies: Code-Left manifestos, agent workflows, product-to-production playbooks, templates, and Cursor skills for making software delivery safer, more explicit, and more agent-friendly.
 
 ## The Core Thesis
 
@@ -39,7 +70,7 @@ The hard part is integration:
 
 In many organizations, that knowledge lives in engineers' heads. That does not scale when agents start participating in delivery.
 
-This repo is about externalizing that knowledge into practical assets:
+Code-Left externalizes that knowledge into practical assets:
 
 - architecture rules
 - extension-point playbooks
@@ -49,32 +80,80 @@ This repo is about externalizing that knowledge into practical assets:
 - escalation policies
 - repeatable skills and workflows
 
-## Code-Left
+## Operating Model
 
-`code-left.md` is the main manifesto for this repo.
-
-It defines Code-Left as an operating model in which engineers stop being the default implementors of every feature and instead become the designers of the system that safely turns product intent into production code.
-
-In this model:
+In the Code-Left model:
 
 - **Product owns product intent.**
 - **Agents own implementation execution.**
 - **Engineering owns the system of safe integration.**
 
-That system includes extension points, contracts, templates, instruction layers, validation steps, policy checks, review triggers, and deployment guardrails.
+Engineering's system includes extension points, contracts, templates, instruction layers, validation steps, policy checks, review triggers, and deployment guardrails.
 
 The result is not less engineering. It is higher-leverage engineering.
 
-## Who This Is For
+## Repository Contents
 
-This repo is intended for:
+### `code-left.md`
 
-- Engineering leaders designing AI-assisted delivery workflows.
-- Product leaders who want specs and prototypes to become more implementation-ready.
-- Staff and principal engineers turning tribal knowledge into explicit integration systems.
-- Platform teams building internal agent workflows.
-- PM and engineer pairs experimenting with faster product-to-production loops.
-- Companies trying to move from "we use AI tools" to "our system is AI-ready."
+The main manifesto and playbook for Code-Left. It explains the operating model, the engineering role, the product role, and the minimum structure for integration playbooks.
+
+### `docs/`
+
+Guides for adopting Code-Left:
+
+- [docs/getting-started.md](docs/getting-started.md) - the simplest first pilot path.
+- [docs/implementation-guide.md](docs/implementation-guide.md) - deeper guidance for building a Code-Left-ready repo.
+- [docs/pm-framework/](docs/pm-framework/) - the product-side bet and context framework.
+
+### `templates/pm/`
+
+Product-side templates for context layers, bet briefs, complexity assessment, technical specs, analytics context, and source inventory. Start with [templates/pm/README.md](templates/pm/README.md).
+
+### `templates/engineering/`
+
+Engineering-side templates for turning repo knowledge into safe integration structure. Start with [templates/engineering/README.md](templates/engineering/README.md).
+
+For first setup, use only:
+
+1. [repo-readiness-assessment.md](templates/engineering/repo-readiness-assessment.md)
+2. [integration-point-playbook-template.md](templates/engineering/integration-point-playbook-template.md)
+3. [change-package-template.md](templates/engineering/change-package-template.md)
+
+The remaining engineering templates are optional and should be used after the first pilot exposes repeated needs.
+
+### `skills/`
+
+Portable markdown instruction sets for coding agents. The repo stores source copies under `skills/`; teams can copy or adapt them into the skill path used by their agent tool, such as `<agent-config>/skills/...`.
+
+Useful starting skills:
+
+- [skills/pm/map-product-context/](skills/pm/map-product-context/) - map product context sources.
+- [skills/pm/build-product-brief/](skills/pm/build-product-brief/) - draft or improve a product bet brief.
+- [skills/pm/assess-work-item-complexity/](skills/pm/assess-work-item-complexity/) - route work by complexity and risk.
+- [skills/pm/build-technical-spec/](skills/pm/build-technical-spec/) - produce an implementation-ready spec.
+- [skills/map-integration-candidates/](skills/map-integration-candidates/) - find strong engineering integration-point candidates in a repo.
+- [skills/build-integrate-skill/](skills/build-integrate-skill/) - create a repo-specific integration orchestrator skill.
+
+## Adoption Paths
+
+### Engineering and integration
+
+1. Choose one high-repetition, low-risk change type.
+2. Document the allowed integration point.
+3. Package one real change.
+4. Run an agent-assisted implementation through the playbook.
+5. Define validation and review rules only when the pilot shows they need to be explicit.
+6. Convert repeated mistakes into stronger rules, templates, or checks.
+7. Expand to the next change type.
+
+### Product and context
+
+1. Map existing context sources with [skills/pm/map-product-context/](skills/pm/map-product-context/).
+2. Stand up the three context layers using [templates/pm/](templates/pm/).
+3. Run one real bet through **build-product-brief** -> **assess-work-item-complexity** -> **build-technical-spec**.
+
+Product supplies implementation-ready intent. Engineering supplies safe integration. Agents execute inside those boundaries.
 
 ## What AI-Ready Means Here
 
@@ -92,59 +171,6 @@ A repo is becoming AI-ready when:
 - human review focuses on risk and exceptions, not reconstructing missing context
 
 A repo is not AI-ready when every task begins with repo archaeology, undocumented conventions, and a senior engineer manually catching the same mistakes over and over.
-
-## Repository Contents - On going
-
-### `code-left.md`
-
-An earlier and more executive-oriented articulation of Code-Left.
-
-Useful for introducing the idea to teams that need a concise strategic framing before going into the deeper manifesto.
-
-### `docs/pm-framework/`
-
-Product-side framework: **every feature is a bet** on customer value, and strong bets need three kinds of context agents can use:
-
-1. **Where we want to get to** — vision, goals, strategy, principles.
-2. **Who we are now** — the shipping product, segments, market, stakeholders, and evidence (including analytics when you use them).
-3. **How we work** — the workflow from idea to brief to spec to ship, including review and escalation.
-
-Start with [docs/pm-framework/README.md](docs/pm-framework/README.md). For how the **product role** shifts under this model (and a hook for future UX docs), see [docs/pm-framework/product-role-in-code-left.md](docs/pm-framework/product-role-in-code-left.md).
-
-### `templates/pm/`
-
-Copy-paste templates for those three layers, a bet brief, complexity assessment, technical spec, and a **context source inventory** (docs plus tools such as PostHog or Google Analytics). See [templates/pm/README.md](templates/pm/README.md).
-
-### `skills/`
-
-Agent-oriented **skills**: PM framework (map context, bet brief, complexity, technical spec), integration discovery, and helpers to build an integration orchestrator for your own repo. See [skills/README.md](skills/README.md).
-
-### `docs/`
-
-Additional course and collaboration materials may live here as the repo grows. The PM bet-and-context framework is under `docs/pm-framework/` above.
-
-## Suggested Adoption Path
-
-Start narrow, learn quickly, and expand only after the workflow is reliable.
-
-### Product and context (PM)
-
-1. Map existing context sources with the **map-product-context** skill ([skills/pm/map-product-context/](skills/pm/map-product-context/)).
-2. Stand up the three layers (even one short file each) using `templates/pm/`.
-3. Run one real bet through **build-product-brief** → **assess-work-item-complexity** → **build-technical-spec**.
-
-### Engineering and integration
-
-1. Choose one high-repetition, low-risk change type.
-2. Document the allowed integration point.
-3. Create a change package template for product.
-4. Create an agent instruction set for implementation.
-5. Define required validation and review rules.
-6. Run several real changes through the workflow.
-7. Convert repeated mistakes into stronger rules, templates, or checks.
-8. Expand to the next change type.
-
-The point is not to fix the same ambiguity forever. The point is to platformize the answer.
 
 ## Principles
 
@@ -185,7 +211,7 @@ If anything, Code-Left requires stronger engineering discipline because the path
 This repo can grow into a practical library of AI-readiness assets, including:
 
 - integration playbooks by change type
-- reusable Skills for product, design, engineering, and review workflows
+- reusable agent skills for product, design, engineering, and review workflows
 - company readiness assessments
 - spec and POC evaluation rubrics
 - agent review checklists
@@ -193,14 +219,14 @@ This repo can grow into a practical library of AI-readiness assets, including:
 - production safety policies
 - examples of AI-ready repo structures
 - training material for PM and engineering pairs
+- a setup-orchestrator skill that guides the full Code-Left adoption flow
 
 ## The Operating Agreement
 
-Code-Left means engineering designs the system by which product intent enters production, so that coding agents can implement safely through known seams instead of relying on feature-by-feature human translation.
+Code-Left means engineering designs the system by which product intent enters production, so coding agents can implement safely through known seams instead of relying on feature-by-feature human translation.
 
 That is the shift:
 
 - not less engineering
 - different engineering
 - higher-leverage engineering
-
