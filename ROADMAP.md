@@ -25,8 +25,9 @@ Status: in progress
 Status: in progress
 
 - Add a complete first-pilot example.
-- Create a skill that guides a team through Code-Left setup.
-- Orchestrate readiness assessment, integration-point selection, playbook creation, and pilot packaging.
+- Add a natural-language setup spec for installing Code-Left skills without cloning the repo.
+- Create a skill that installs a local Code-Left skills bundle.
+- Orchestrate integration-point selection, integrate skill creation, product skills, and local README creation.
 - Keep the workflow agent-neutral and repo-portable.
 
 ## Phase 4 - Worked examples

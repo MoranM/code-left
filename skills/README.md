@@ -19,7 +19,7 @@ Templates these skills reference: [../templates/pm/](../templates/pm/). Concept 
 
 | Skill | Path | Use when |
 | --- | --- | --- |
-| **setup-code-left** | [setup-code-left/](setup-code-left/) | Creating the first Code-Left pilot package: readiness assessment, playbook, spec/change-package wrapper, and pilot plan. |
+| **setup-code-left** | [setup-code-left/](setup-code-left/) | Installing a local Code-Left skills bundle: integrate orchestrator, first integration-point skill, product skills, and README. |
 | **map-integration-candidates** | [map-integration-candidates/](map-integration-candidates/) | Scanning a codebase for strong integration-point candidates before writing recipe skills. |
 | **build-integrate-skill** | [build-integrate-skill/](build-integrate-skill/) | Creating a project-specific **integration orchestrator** skill (similar to an `/integrate` flow) for your repo. |
 
@@ -28,6 +28,6 @@ Templates these skills reference: [../templates/pm/](../templates/pm/). Concept 
 1. **map-product-context** — know what context you have and what to add first.
 2. Fill the three context layers from **templates/pm** (copy into your product repo as `docs/context/` or similar).
 3. **build-product-brief** → **assess-work-item-complexity** → **build-technical-spec** for real bets.
-4. Use **setup-code-left** to create the first engineering pilot package.
+4. Use **setup-code-left** to install the first local Code-Left skills bundle.
 5. Use **map-integration-candidates** when you need help choosing or expanding integration points.
 6. Use **build-integrate-skill** after one or two pilots show which orchestration rules should become reusable.

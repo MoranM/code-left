@@ -13,6 +13,22 @@ The core idea is **Code-Left**: engineering designs the system by which product 
 
 If you are new to Code-Left, do not start by documenting everything. Start with one narrow pilot.
 
+### Use without cloning
+
+You do not need to clone this repo into your codebase.
+
+From your target repo, ask your coding agent to follow [NL-SPEC.md](NL-SPEC.md) using this repository as the source reference:
+
+```text
+I want to set up Code-Left in this repository.
+Use https://github.com/MoranM/code-left as the reference.
+Follow https://github.com/MoranM/code-left/blob/main/NL-SPEC.md.
+Do not clone the Code-Left repo into this codebase.
+Create a local Code-Left skills folder for this repo.
+Start by inspecting this repo and finding one strong integration-point candidate based on existing codebase conventions.
+Do not implement a product feature during setup.
+```
+
 ### Engineering: make one safe seam
 
 Use this path when your main question is: "How do we let agents implement safely in our repo?"
@@ -50,18 +66,6 @@ For deeper adoption, see [docs/implementation-guide.md](docs/implementation-guid
 
 ```mermaid
 flowchart TB
-    Product["Product intent<br/>Briefs, bets, specs, prototypes"]
-    Agents["Agent execution<br/>Implementation through known seams"]
-    Engineering["Engineering integration system<br/>Playbooks, contracts, validation, review"]
-
-    Product --> Agents
-    Engineering --> Agents
-    Agents --> Engineering
-    Engineering --> Product
-```
-
-```mermaid
-flowchart LR
     Spec["Product spec or<br/>change package"]
     Mapping["Map to integration points"]
     Decision{"Required playbooks found?"}
@@ -82,6 +86,7 @@ flowchart LR
 
 | Need | Start here |
 | --- | --- |
+| Install local skills without cloning | [NL-SPEC.md](NL-SPEC.md) |
 | First pilot | [docs/getting-started.md](docs/getting-started.md) |
 | Deeper implementation guidance | [docs/implementation-guide.md](docs/implementation-guide.md) |
 | Worked first-pilot example | [examples/first-pilot/](examples/first-pilot/) |
@@ -96,6 +101,7 @@ This repo is a working library for teams that want to move from ad hoc AI usage 
 
 It contains:
 
+- A natural-language setup spec for installing a local Code-Left skills bundle without cloning this repo.
 - A manifesto and playbook for the Code-Left operating model.
 - Product-side docs for turning ideas into clear bets.
 - Product templates for context, briefs, complexity checks, and technical specs.
@@ -180,7 +186,7 @@ Portable markdown instruction sets for coding agents. The repo stores source cop
 
 Useful starting skills:
 
-- [skills/setup-code-left/](skills/setup-code-left/) - guide a team through the first Code-Left setup package.
+- [skills/setup-code-left/](skills/setup-code-left/) - install a local Code-Left skills bundle in a target repo.
 - [skills/pm/map-product-context/](skills/pm/map-product-context/) - map product context sources.
 - [skills/pm/build-product-brief/](skills/pm/build-product-brief/) - draft or improve a product bet brief.
 - [skills/pm/assess-work-item-complexity/](skills/pm/assess-work-item-complexity/) - route work by complexity and risk.

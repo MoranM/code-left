@@ -4,10 +4,11 @@ Start here if you want to apply Code-Left in a real repository.
 
 ## First setup
 
+- [../NL-SPEC.md](../NL-SPEC.md) - copy-paste setup spec for coding agents; use this to install local Code-Left skills without cloning the repo.
 - [getting-started.md](getting-started.md) - the shortest path for a first pilot.
 - [implementation-guide.md](implementation-guide.md) - deeper guidance for expanding from one pilot to a repeatable operating model.
 - [../examples/first-pilot/](../examples/first-pilot/) - a filled-in first-pilot package.
-- [../skills/setup-code-left/](../skills/setup-code-left/) - an agent skill that guides the setup process.
+- [../skills/setup-code-left/](../skills/setup-code-left/) - an agent skill that installs the local Code-Left skills bundle.
 
 ## Product framework
 

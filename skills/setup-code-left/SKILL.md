@@ -1,63 +1,68 @@
 ---
 name: setup-code-left
-description: Guides a team through the first Code-Left setup for a target repo or product area. Use when creating one readiness assessment, one pilot integration-point playbook, one product spec or change package wrapper, and a first agent-assisted implementation path.
+description: Installs a local Code-Left skills bundle in a target repo. Use when creating an integrate orchestrator, one codebase-specific integration-point skill, product spec/brief skills, and a README for the new Code-Left flow.
 ---
 
 # Setup Code-Left
 
-You are the **Code-Left Setup Guide**. Your job is to help a team move from ad hoc agent usage to a first safe Code-Left pilot.
+You are the **Code-Left Setup Guide**. Your job is to install the first local Code-Left skills bundle in a target repository.
 
-Do not implement the product change. Build the setup package that makes a first agent-assisted implementation possible.
+Do not implement a product feature. Create the skills and instructions that make future agent-assisted implementation follow Code-Left.
 
-Use the example in `examples/first-pilot/` as the reference outcome. Use the templates in `templates/engineering/` as the working shapes.
+Use `NL-SPEC.md` as the setup contract.
 
 ---
 
-## Phase 1 - Confirm Target and Output
+## Phase 1 - Confirm Target and Skill Path
 
 Confirm only the minimum missing information:
 
 1. **Target scope:** the full repo, a specific app/package, or a product area.
-2. **Output location:** where to write or draft the first pilot package.
-3. **Mode:** inline draft, files, or both.
+2. **Skills path:** existing agent skill path, or default to `skills/code-left/`.
+3. **Branch policy:** whether to create setup changes on a feature branch if the repo has a convention.
 
 If the user already gave enough direction, proceed without asking.
 
-Recommended default output path:
+Default output:
 
 ```text
-code-left/
-  repo-readiness-assessment.md
-  integration-point-playbook.md
-  change-package.md
-  first-pilot-plan.md
-  review-learnings.md
+skills/code-left/
+  README.md
+  integrate/
+    SKILL.md
+  integration-points/
+    [first-integration-point]/
+      SKILL.md
+  product/
+    build-product-brief/
+      SKILL.md
+    build-technical-spec/
+      SKILL.md
+    assess-work-item-complexity/
+      SKILL.md
 ```
 
-If the target repo already has a docs or handbook convention, follow that convention instead.
+If the target repo already has an agent-skill convention, adapt this structure to that convention.
 
 ---
 
-## Phase 2 - Load Code-Left Foundation
+## Phase 2 - Load Code-Left Source Material
 
 Read only the files needed for setup:
 
-- `docs/getting-started.md`
-- `templates/engineering/README.md`
-- `templates/engineering/repo-readiness-assessment.md`
+- `NL-SPEC.md`
+- `skills/build-integrate-skill/SKILL.md`
+- `skills/map-integration-candidates/SKILL.md`
+- `skills/pm/build-product-brief/SKILL.md`
+- `skills/pm/build-technical-spec/SKILL.md`
+- `skills/pm/assess-work-item-complexity/SKILL.md`
 - `templates/engineering/integration-point-playbook-template.md`
-- `templates/engineering/change-package-template.md`
+- `templates/pm/technical-spec-template.md`
 - `examples/first-pilot/README.md`
-
-Use optional templates only if the pilot clearly needs them:
-
-- `templates/engineering/agent-instruction-template.md`
-- `templates/engineering/validation-policy-template.md`
-- `templates/engineering/escalation-policy-template.md`
 
 ---
 
-## Phase 3 - Map Existing Context
+## Phase 3 - Inspect the Target Repo
 
 Inspect the target scope before asking broad questions.
 
@@ -68,6 +73,7 @@ Map:
 - existing agent skill or instruction folders
 - repeated feature patterns
 - test, build, lint, and validation commands
+- branch or pull request conventions
 
 If a repo is available, prefer non-mutating exploration commands such as:
 
@@ -81,11 +87,11 @@ Do not edit files during discovery.
 
 ---
 
-## Phase 4 - Choose the First Pilot
+## Phase 4 - Select One Strong Integration-Point Candidate
 
-Identify 2-5 repeated change types and score them for first-pilot fit.
+Identify 2-5 repeated change types and choose one strong first candidate.
 
-Strong first pilots are:
+Strong candidates are:
 
 - repeated
 - low to medium risk
@@ -93,7 +99,7 @@ Strong first pilots are:
 - easy to validate
 - bounded to a known product or engineering area
 
-Avoid first pilots that require:
+Avoid candidates that require:
 
 - new infrastructure
 - new permissions model
@@ -102,118 +108,95 @@ Avoid first pilots that require:
 - shared abstraction changes
 - high-risk customer-facing behavior
 
-Recommend one pilot and explain why.
-
-If the choice materially affects the setup and is not obvious, ask the user to confirm the pilot before drafting artifacts.
+If no strong candidate exists, do not create a fake playbook. Create the skills README with setup-blocked status and report that engineering must identify a safe integration point first.
 
 ---
 
-## Phase 5 - Create the Readiness Assessment
+## Phase 5 - Create One Integration-Point Skill
 
-Fill a readiness assessment based on `templates/engineering/repo-readiness-assessment.md`.
+Create one skill under `integration-points/` for the selected candidate.
 
-It must include:
+The skill must include:
 
-- target repo or area
-- recommended pilot
-- candidate change types
-- why the chosen pilot is a good first seam
-- existing examples to study
-- known gaps before the pilot
-- pilot success criteria
-
-Keep the assessment short enough to be useful during real setup.
-
----
-
-## Phase 6 - Draft the Integration-Point Playbook
-
-Create one playbook based on `templates/engineering/integration-point-playbook-template.md`.
-
-The playbook must define:
-
-- purpose
-- use cases and non-use cases
+- frontmatter with lowercase kebab-case `name`
+- when to use it
+- when not to use it
 - allowed scope
-- required locations
+- required file locations
 - required contracts
 - required safeguards
-- reuse expectations
+- reuse expectations and canonical examples
 - escalation triggers
-- validation checklist
+- validation commands
 - completion report requirements
 
-Use concrete repo paths and commands when known. Use `[UNKNOWN]` only when the information cannot be discovered and must be confirmed by the team.
+Use concrete repo paths, commands, and examples. Mark unknowns as `[UNKNOWN]` only when they cannot be discovered.
 
 ---
 
-## Phase 7 - Draft or Wrap One Product Spec
+## Phase 6 - Create the Integrate Orchestrator Skill
 
-Create one change package based on `templates/engineering/change-package-template.md`, or wrap an existing product spec in that shape.
+Create `integrate/SKILL.md`.
 
-A change package is the thin agent-facing wrapper around product intent. It should either link to the product spec or embed the product spec directly. It should not create a second source of truth.
+The skill must guide this flow:
 
-If the user has a real product spec or request, use it. If not, create a clearly labeled example request that fits the selected pilot and mark it as replaceable.
+1. Prepare workspace and confirm branch strategy.
+2. Load the product spec or change package.
+3. Discover local integration-point skills dynamically.
+4. Map the spec against available integration points.
+5. If required playbooks are missing, stop with a missing-playbook report.
+6. If playbooks exist, load them and produce an implementation plan.
+7. Ask for confirmation before editing.
+8. Create or use a feature branch according to repo convention.
+9. Execute only through selected playbooks.
+10. Run validation.
+11. Report changed files, validation results, review needs, and rollout notes.
 
-The package must include:
-
-- source spec mode and reference
-- goal
-- requested behavior
-- acceptance criteria
-- non-goals
-- edge cases
-- references
-- suspected integration point
-- data and permissions
-- rollout notes
-- open questions
+The integrate skill must not invent implementation paths outside documented integration-point skills.
 
 ---
 
-## Phase 8 - Produce the First Pilot Plan
+## Phase 7 - Add Product Skills
 
-Create a short first-pilot plan that tells the implementation agent what to do before editing.
+Add local product skills copied or adapted from the Code-Left source repo:
 
-The plan must include:
+- `product/build-product-brief/SKILL.md`
+- `product/build-technical-spec/SKILL.md`
+- `product/assess-work-item-complexity/SKILL.md`
 
-- selected integration point
-- why the playbook applies
-- missing-playbook check
-- escalation check
-- files or examples to read first
-- proposed implementation sequence
-- validation commands
-- expected completion report
+Keep them tool-neutral. Adjust only paths or local conventions needed by the target repo.
 
-If the spec or change package cannot be mapped to an available integration-point playbook, the first-pilot plan must stop and report the missing playbook. Do not invent an implementation path outside documented repo seams.
-
-If the team is ready for a reusable integration orchestrator, recommend running `build-integrate-skill`. Otherwise, say to run one or two pilots manually first.
+These skills should help product create bets, briefs, routing assessments, and implementation-ready specs that can be loaded into `integrate`.
 
 ---
 
-## Phase 9 - Create Review Learnings Placeholder
+## Phase 8 - Add Local Skills README
 
-Create a `review-learnings.md` placeholder so the team has a place to capture what the pilot teaches.
+Create `README.md` in the local Code-Left skills folder.
 
-It should ask for:
+It must explain:
 
-- what the agent got right
-- what reviewers had to correct
-- what rules should be added to the playbook
-- what template changes are needed
-- whether to repeat the same pilot or expand to another change type
+- what Code-Left flow was installed
+- how to create or provide a product spec or change package
+- how to invoke the product skills
+- how to invoke `integrate`
+- which integration-point playbooks currently exist
+- what happens when a required playbook is missing
+- how to add the next integration-point playbook
+- which validation commands the first playbook uses
 
 ---
 
-## Phase 10 - Final Report
+## Phase 9 - Final Report
 
 End with:
 
-- files created or drafted
-- selected pilot change type
+- skills folder path
+- created skills
+- selected first integration-point candidate
+- validation commands captured
 - missing information marked `[UNKNOWN]`
-- how to load the spec or change package into the agent and map it to playbooks
-- whether to use `build-integrate-skill` now or later
+- how to run the new Code-Left flow
+- whether setup is ready for one pilot or blocked by missing integration coverage
 
-Do not claim the repo is Code-Left ready after one setup pass. Say it has a first pilot package and should improve through review learnings.
+Do not claim the repo is fully Code-Left ready. Say it has a local Code-Left skills bundle with an integrate orchestrator and at least one real integration-point playbook, or a clear setup-blocked report.

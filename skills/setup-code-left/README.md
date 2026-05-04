@@ -1,15 +1,13 @@
 # Setup Code-Left
 
-`setup-code-left` guides a team through the first Code-Left setup for a target repository or product area.
+`setup-code-left` guides a team through installing the first local Code-Left skills bundle in a target repository.
 
-It does not implement product features. It helps create the operating artifacts needed for a first safe pilot:
+It does not implement product features. It creates the agent-facing workflow that makes future implementation safer:
 
-- one repo readiness assessment
-- one selected pilot change type
-- one integration-point playbook
-- one real product spec or change package wrapper for agent handoff
-- one recommended agent execution path
-- one feedback loop for review learnings
+- one `integrate` orchestrator skill
+- one `integration-points/` skill for a strong codebase-specific candidate
+- product skills for bets, briefs, complexity, and specs
+- a local README explaining the new flow
 
 ## When to use it
 
@@ -18,38 +16,50 @@ Use this skill when:
 - a team wants to start adopting Code-Left
 - engineering knowledge is still mostly implicit
 - agents are already being used but implementation feels ad hoc
-- a team needs help connecting templates, playbooks, and skills into one first pilot
+- a team wants an agent to map specs to documented playbooks before implementation
 
 ## What it produces
 
-The usual output is a first pilot package in the target repo or handbook:
+The usual output is a local skills folder in the target repo.
+
+If the target repo has no agent-skill convention, use:
 
 ```text
-code-left/
-  repo-readiness-assessment.md
-  integration-point-playbook.md
-  change-package.md
-  first-pilot-plan.md
-  review-learnings.md
+skills/code-left/
+  README.md
+  integrate/
+    SKILL.md
+  integration-points/
+    [first-integration-point]/
+      SKILL.md
+  product/
+    build-product-brief/
+      SKILL.md
+    build-technical-spec/
+      SKILL.md
+    assess-work-item-complexity/
+      SKILL.md
 ```
 
-The exact path can vary. The important part is that the package is easy for product, engineering, and agents to find.
+If the target agent expects another path, adapt the same structure to that path.
+
+## The installed flow
+
+After setup, users should be able to:
+
+1. Create or provide a product spec or change package.
+2. Invoke the local `integrate` skill.
+3. Let the agent map the spec to available integration-point playbooks.
+4. Get an implementation plan when playbooks exist.
+5. Get a missing-playbook report when coverage is missing.
+6. Execute the change in a feature branch only after confirmation.
 
 ## Related assets
 
+- Natural-language setup spec: [../../NL-SPEC.md](../../NL-SPEC.md)
 - Example outcome: [../../examples/first-pilot/](../../examples/first-pilot/)
-- Starter guide: [../../docs/getting-started.md](../../docs/getting-started.md)
-- Engineering templates: [../../templates/engineering/](../../templates/engineering/)
 - Integration candidate scout: [../map-integration-candidates/](../map-integration-candidates/)
 - Integration orchestrator builder: [../build-integrate-skill/](../build-integrate-skill/)
-
-## How this differs from `build-integrate-skill`
-
-`setup-code-left` helps a team create the first Code-Left pilot package.
-
-`build-integrate-skill` creates a reusable integration orchestrator skill after the team knows which playbooks and validation rules should drive implementation.
-
-In most teams, use `setup-code-left` first.
 
 ## Missing playbook rule
 

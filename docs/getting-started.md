@@ -14,7 +14,7 @@ Those three files are enough to test whether product intent can move toward prod
 
 For a filled-in version of this flow, see [../examples/first-pilot/](../examples/first-pilot/). The example also includes two useful support files: an agent implementation plan and review learnings.
 
-If you want an agent to guide the setup, use [../skills/setup-code-left/](../skills/setup-code-left/). That skill produces the three starter artifacts plus a first-pilot plan and a review-learnings placeholder.
+If you want an agent to install the working flow, use [../skills/setup-code-left/](../skills/setup-code-left/) or the copy-paste setup spec in [../NL-SPEC.md](../NL-SPEC.md). That setup creates a local skills bundle with an `integrate` orchestrator, one integration-point skill, product skills, and usage instructions.
 
 ## Step 1 - Assess the repo
 
