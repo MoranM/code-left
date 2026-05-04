@@ -2,6 +2,20 @@
 
 Use this template to define one safe seam for agent-assisted implementation.
 
+```mermaid
+flowchart LR
+    Scope["Allowed scope"]
+    Locations["Required locations"]
+    Contracts["Contracts"]
+    Safeguards["Safeguards"]
+    Validation["Validation"]
+    Escalation["Escalation triggers"]
+
+    Scope --> Locations --> Contracts --> Safeguards --> Validation
+    Safeguards --> Escalation
+    Validation --> Escalation
+```
+
 ## Purpose
 
 What kind of change this playbook handles.

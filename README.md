@@ -1,5 +1,8 @@
 # Code Left
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Docs](https://github.com/MoranM/code-left/actions/workflows/docs.yml/badge.svg)](https://github.com/MoranM/code-left/actions/workflows/docs.yml)
+
 Skills, playbooks, templates, and operating-model docs for helping teams become more AI-ready.
 
 This repository is built around a simple premise: companies do not become AI-ready by giving everyone a coding agent and hoping for the best. They become AI-ready by making product intent clearer, engineering knowledge more explicit, and production change safer to delegate.
@@ -41,6 +44,46 @@ For a full Code-Left pilot, combine both tracks:
 - The team updates the playbook after review.
 
 For deeper adoption, see [docs/implementation-guide.md](docs/implementation-guide.md).
+
+## How Code-Left Works
+
+```mermaid
+flowchart TB
+    Product["Product intent<br/>Briefs, bets, specs, prototypes"]
+    Agents["Agent execution<br/>Implementation through known seams"]
+    Engineering["Engineering integration system<br/>Playbooks, contracts, validation, review"]
+
+    Product --> Agents
+    Engineering --> Agents
+    Agents --> Engineering
+    Engineering --> Product
+```
+
+```mermaid
+flowchart LR
+    Brief["Brief or change package"]
+    Complexity["Complexity check"]
+    Spec["Technical spec<br/>when needed"]
+    Playbook["Integration playbook"]
+    Implementation["Agent implementation"]
+    Validation["Validation"]
+    Review["Review and rollout"]
+    Learning["Update playbook"]
+
+    Brief --> Complexity --> Spec --> Playbook --> Implementation --> Validation --> Review --> Learning
+    Learning -.-> Playbook
+```
+
+## Repo Map
+
+| Need | Start here |
+| --- | --- |
+| First pilot | [docs/getting-started.md](docs/getting-started.md) |
+| Deeper implementation guidance | [docs/implementation-guide.md](docs/implementation-guide.md) |
+| Product context and bets | [docs/pm-framework/](docs/pm-framework/) |
+| Engineering templates | [templates/engineering/](templates/engineering/) |
+| Product templates | [templates/pm/](templates/pm/) |
+| Agent skills | [skills/](skills/) |
 
 ## What This Repo Is
 

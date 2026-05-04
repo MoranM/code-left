@@ -4,6 +4,20 @@ This guide explains how to move from one pilot to a repeatable Code-Left operati
 
 Code-Left works when product intent, engineering integration rules, and agent execution are connected by explicit artifacts.
 
+## Adoption maturity
+
+```mermaid
+flowchart LR
+    AdHoc["Ad hoc AI use"]
+    Specs["Documented specs"]
+    Seams["Known seams"]
+    Skills["Reusable agent skills"]
+    Gates["Validation gates"]
+    Delegation["Scalable delegation"]
+
+    AdHoc --> Specs --> Seams --> Skills --> Gates --> Delegation
+```
+
 ## 1. Choose integration points
 
 An integration point is a known seam where a common change type enters the system.
