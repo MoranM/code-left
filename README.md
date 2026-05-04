@@ -80,6 +80,7 @@ flowchart LR
 | --- | --- |
 | First pilot | [docs/getting-started.md](docs/getting-started.md) |
 | Deeper implementation guidance | [docs/implementation-guide.md](docs/implementation-guide.md) |
+| Worked first-pilot example | [examples/first-pilot/](examples/first-pilot/) |
 | Product context and bets | [docs/pm-framework/](docs/pm-framework/) |
 | Engineering templates | [templates/engineering/](templates/engineering/) |
 | Product templates | [templates/pm/](templates/pm/) |
@@ -149,6 +150,10 @@ Guides for adopting Code-Left:
 - [docs/implementation-guide.md](docs/implementation-guide.md) - deeper guidance for building a Code-Left-ready repo.
 - [docs/pm-framework/](docs/pm-framework/) - the product-side bet and context framework.
 
+### `examples/`
+
+Worked examples that show what Code-Left artifacts look like when filled in. Start with [examples/first-pilot/](examples/first-pilot/).
+
 ### `templates/pm/`
 
 Product-side templates for context layers, bet briefs, complexity assessment, technical specs, analytics context, and source inventory. Start with [templates/pm/README.md](templates/pm/README.md).
@@ -171,6 +176,7 @@ Portable markdown instruction sets for coding agents. The repo stores source cop
 
 Useful starting skills:
 
+- [skills/setup-code-left/](skills/setup-code-left/) - guide a team through the first Code-Left setup package.
 - [skills/pm/map-product-context/](skills/pm/map-product-context/) - map product context sources.
 - [skills/pm/build-product-brief/](skills/pm/build-product-brief/) - draft or improve a product bet brief.
 - [skills/pm/assess-work-item-complexity/](skills/pm/assess-work-item-complexity/) - route work by complexity and risk.

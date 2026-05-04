@@ -13,6 +13,8 @@ This project follows a lightweight version of [Keep a Changelog](https://keepach
 - Engineering templates for readiness, integration playbooks, change packages, agent instructions, validation policy, and escalation policy.
 - Repo map and Mermaid diagrams for the operating model and product-to-production pipeline.
 - Contribution, roadmap, security, issue template, pull request template, and documentation workflow scaffolding.
+- First-pilot worked example showing readiness assessment, playbook, change package, agent plan, and review learnings.
+- `setup-code-left` skill for guiding teams through the first Code-Left setup package.
 
 ### Changed
 

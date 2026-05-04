@@ -20,10 +20,11 @@ Status: in progress
 - Documentation checks.
 - Mermaid diagrams for the operating model and adoption flow.
 
-## Phase 3 - Setup orchestrator skill
+## Phase 3 - Example and setup skill
 
-Status: planned
+Status: in progress
 
+- Add a complete first-pilot example.
 - Create a skill that guides a team through Code-Left setup.
 - Orchestrate readiness assessment, integration-point selection, playbook creation, and pilot packaging.
 - Keep the workflow agent-neutral and repo-portable.
@@ -32,10 +33,9 @@ Status: planned
 
 Status: planned
 
-- Add a complete first-pilot example.
-- Show one product brief or change package.
-- Show one engineering integration playbook.
-- Show the resulting agent plan, validation path, and playbook improvement loop.
+- Add more examples by change type.
+- Show product and engineering variants for common workflows.
+- Include examples of playbook improvement after review.
 
 ## Phase 5 - Tool adapters
 
