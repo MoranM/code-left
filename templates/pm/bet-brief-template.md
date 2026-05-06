@@ -31,6 +31,14 @@ Assess the following three criteria and provide a one-line rationale for each:
 - **Flow impact:** [Simple/Complex] — [rationale]
 - **Information architecture:** [Simple/Complex] — [rationale]
 
+### Design-path inputs
+
+These fields help the complexity assessment recommend the right PM design action. Fill what you know; the assessment skill can infer the rest and mark uncertainty.
+
+- **Nature of change:** [UI-dominant | UX-dominant | Mixed] — [one-line rationale]
+- **Design-system coverage:** [Known pattern | Partial / unsure | Unknown / net new] — [one-line rationale or `TBD`]
+- **Figma / design reference:** [link, path, or `none yet`]
+
 ---
 
 ### Complexity routing summary _(optional — fill after assessment)_

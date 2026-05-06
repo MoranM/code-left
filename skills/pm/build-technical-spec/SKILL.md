@@ -27,7 +27,7 @@ The spec must carry enough **bet context** in `## Context from the bet` (or the 
 
 ## Required inputs
 
-- **`bet-brief.md`** or **org product brief / PRD** for the feature _(strongly preferred — supplies UX complexity / equivalent and product guardrails)_
+- **`bet-brief.md`** or **org product brief / PRD** for the feature _(strongly preferred — supplies UX complexity, design-path inputs, and product guardrails)_
 - If no brief: existing technical spec file or explicit product intent _(spec-only mode)_ — flag gaps with `[NEEDS CLARIFICATION]`.
 - **Org technical spec template** (path or link) when the team has one—the **primary** outline to use when drafting.
 - Reference / gap-check: [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md)
@@ -77,7 +77,7 @@ Normative bullets must cover, when relevant:
 
 ## Workflow
 
-0. **Bet complexity (for non-trivial work):** Follow [`../assess-work-item-complexity/SKILL.md`](../assess-work-item-complexity/SKILL.md) and [`../assess-work-item-complexity/eng-complexity-rubric.md`](../assess-work-item-complexity/eng-complexity-rubric.md). A quick chat assessment is enough for most work; produce or update `bet-complexity-assessment.md` (or the org’s equivalent) only when risk, size, disagreement, or team policy warrants a durable file. Use the brief for UX complexity when present; otherwise infer with `[INFERRED]`. Summarize routing in chat before deep spec drafting.
+0. **Bet complexity and design path (for non-trivial work):** Follow [`../assess-work-item-complexity/SKILL.md`](../assess-work-item-complexity/SKILL.md), [`../assess-work-item-complexity/eng-complexity-rubric.md`](../assess-work-item-complexity/eng-complexity-rubric.md), and [`../assess-work-item-complexity/ux-design-path-rubric.md`](../assess-work-item-complexity/ux-design-path-rubric.md). A quick chat assessment is enough for most work; produce or update `bet-complexity-assessment.md` (or the org’s equivalent) only when risk, size, disagreement, or team policy warrants a durable file. Use the brief for UX complexity and design-path inputs when present; otherwise infer with `[INFERRED]`. Summarize both the engineering routing recommendation and the PM design action before deep spec drafting.
 1. Read the **org technical spec template** if provided; always read [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md) and note any **gaps** the org template does not cover (add those sections or bullets rather than skipping).
 2. Read `bet-brief.md` (or org brief) when present. If missing, use spec plus user context; note gaps.
 3. If the brief already contains `## Spec split tracking`, treat it as authoritative — do **not** re-suggest a split.

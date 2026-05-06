@@ -7,9 +7,9 @@ description: Assesses work-item complexity (bets, scoped enhancements, bugs) acr
 
 ## Purpose
 
-Produce a **routing recommendation** from three axes. Output must be **evidence-based** from available inputs—do not invent constraints, metrics, or user research.
+Produce a **routing recommendation** from three axes plus a mandatory **PM design-path recommendation**. Output must be **evidence-based** from available inputs—do not invent constraints, metrics, or user research.
 
-**Org templates:** Score using whatever brief, PRD, spec, or ticket the team already uses. Use Code-Left templates ([`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md), [`bet-complexity-assessment-template.md`](../../../templates/pm/bet-complexity-assessment-template.md)) as **reference** for what good evidence looks like—do **not** require rewriting their artifact into Code-Left format before routing. If their template omits UX complexity, behavioral risk, or engineering cues, **infer** with `[INFERRED]` and **suggest** additions.
+**Org templates:** Score using whatever brief, PRD, spec, or ticket the team already uses. Use Code-Left templates ([`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md), [`bet-complexity-assessment-template.md`](../../../templates/pm/bet-complexity-assessment-template.md)) as **reference** for what good evidence looks like—do **not** require rewriting their artifact into Code-Left format before routing. If their template omits UX complexity, design-system coverage, behavioral risk, or engineering cues, **infer** with `[INFERRED]` and **suggest** additions.
 
 Routing must reflect **product and behavior risk**, not only code size: a technically small change can still need engineering workflow if it changes trust, positioning, compliance exposure, or user mental model.
 
@@ -44,7 +44,19 @@ If **no brief and no spec**, ask for a brief excerpt, spec outline, ticket, or 5
 
 Scenario, repro, ticket, or short bullets are enough. Do **not** demand a full brief.
 
-## Axis 1 — UX complexity
+## Axis 1 — UX complexity and design path
+
+This axis produces two outputs:
+
+1. **PM design-path recommendation** - how the PM should handle the UX/UI design dimension before implementation.
+2. **UX complexity score** - `Simple`, `Complex`, or `N/A` for UI-only work.
+
+Before scoring, read [`ux-design-path-rubric.md`](./ux-design-path-rubric.md) and follow its flow:
+
+1. Classify the work as `UI-dominant`, `UX-dominant`, or `Mixed`.
+2. Apply the design-system gate: `Known pattern`, `Partial / unsure`, or `Unknown / net new`.
+3. For `UX-dominant` and `Mixed`, score UX as `Simple` or `Complex`; for `UI-dominant`, record UX complexity as `N/A`.
+4. Recommend the PM design action from the rubric.
 
 **Reference criteria** (when the team has no UX section): Section **0. UX complexity** in [`templates/pm/bet-brief-template.md`](../../../templates/pm/bet-brief-template.md).
 
@@ -52,6 +64,7 @@ Scenario, repro, ticket, or short bullets are enough. Do **not** demand a full b
 - If missing: infer Simple vs Complex using the same three criteria; label `[INFERRED]` and list unknowns.
 - If no brief: infer from spec, ticket, or scenario with `[INFERRED]`.
 - Small fixes without a brief: default **Simple** unless multiple flows or IA change.
+- UI-dominant work: UX complexity is **N/A**. Use the design-system gate to recommend whether a coding agent is enough, designer review is needed, or a designer should define the feature and improve the design system.
 
 ## Axis 2 — Behavioral change
 
@@ -90,6 +103,8 @@ Unless the org overrides in **how we work** docs:
 
 **Escalation:** If the assessment depends on `[INFERRED]` or `[UNKNOWN]` for critical areas, recommend **engineering workflow** at minimum until clarified.
 
+**Design path:** The design-path recommendation is mandatory and parallel. It never overrides the primary engineering routing recommendation. Always tell the PM both the execution route and the design action.
+
 ## Outputs
 
 ### Path A — Quick assessment (default)
@@ -100,7 +115,8 @@ Post a short assessment in chat unless the user asks for a file or the work is l
 ## Quick complexity assessment
 
 - **Tier:** [Bet | Scoped enhancement | Bug fix]
-- **UX complexity:** [Simple | Complex] — [evidence]
+- **UX complexity:** [Simple | Complex | N/A] — [evidence]
+- **Design path:** [UI-dominant | UX-dominant | Mixed] / [Known pattern | Partial / unsure | Unknown / net new] → [PM design recommendation] — [PM action]
 - **Behavioral change:** [Low | Medium | High] — [evidence]
 - **Engineering complexity:** [Low | Medium | High] — [evidence]
 - **Recommendation:** [Coding agent | PM self-serve | Engineering workflow | Hand to engineering]
@@ -132,5 +148,7 @@ Skip editing the brief if the user declines.
 
 - [ ] Tier identified
 - [ ] All axes scored with evidence
+- [ ] Design path classified with evidence using [`ux-design-path-rubric.md`](./ux-design-path-rubric.md)
+- [ ] PM design action presented next to the engineering routing recommendation
 - [ ] Recommendation matches matrix or documents an override from **how we work**
 - [ ] Open gaps listed

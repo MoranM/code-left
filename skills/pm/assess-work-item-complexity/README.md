@@ -1,6 +1,6 @@
 # assess-work-item-complexity
 
-Produces an **evidence-based routing recommendation** for a bet, scoped enhancement, or bug fix across UX complexity, behavioral change, and engineering complexity. Works with **your org’s** brief, spec, ticket, or notes; Code-Left templates are optional **reference** shapes (see [SKILL.md](./SKILL.md)).
+Produces an **evidence-based routing recommendation** for a bet, scoped enhancement, or bug fix across UX complexity, behavioral change, engineering complexity, and PM design path. Works with **your org’s** brief, spec, ticket, or notes; Code-Left templates are optional **reference** shapes (see [SKILL.md](./SKILL.md)).
 
 ## When to use
 
@@ -11,6 +11,7 @@ Produces an **evidence-based routing recommendation** for a bet, scoped enhancem
 
 - [SKILL.md](./SKILL.md)
 - [eng-complexity-rubric.md](./eng-complexity-rubric.md)
+- [ux-design-path-rubric.md](./ux-design-path-rubric.md)
 
 ## Output artifact
 

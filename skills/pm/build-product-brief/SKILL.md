@@ -39,8 +39,8 @@ If the user provides paths or pastes their org **product brief**, **PRD**, **ini
 
 1. Treat that artifact and its headings as the **structure of record**.
 2. Read [`templates/pm/bet-brief-template.md`](../../../templates/pm/bet-brief-template.md) in parallel and **map** Code-Left sections to theirs (by name or intent).
-3. **Preserve** their section order and naming where reasonable; **suggest** new sections or bullets only when important intent evidence is missing (problem, user, scope, success, non-goals, evidence, UX complexity when relevant).
-4. If their template has no **UX complexity** block equivalent, add or propose one aligned with Section 0 of the reference template (or mark `[INFERRED]` per workflow below).
+3. **Preserve** their section order and naming where reasonable; **suggest** new sections or bullets only when important intent evidence is missing (problem, user, scope, success, non-goals, evidence, UX complexity, or design-path inputs when relevant).
+4. If their template has no **UX complexity** or **design-path inputs** equivalent, add or propose fields aligned with Section 0 of the reference template (or mark `[INFERRED]` per workflow below).
 
 ## Required inputs
 
@@ -70,7 +70,7 @@ If missing details would change the bet’s value, scope, user, risk, or success
    - only then ask for a current metric, export, or tool query if the brief needs a number that is missing or stale.
 5. If a brief exists, improve it **in the team’s structure**; otherwise create from the team template or, absent that, from the reference template.
 6. **Challenge and clarify** before writing dense sections: pain today, primary user, explicit non-goals.
-7. **Section 0 — UX complexity:** infer from information so far using the reference template’s three criteria. Present classification and rationale for confirmation if the user is in the loop; otherwise document as `[INFERRED]` where needed. If the team template has an equivalent section, align with it.
+7. **Section 0 — UX complexity and design-path inputs:** infer UX complexity from information so far using the reference template’s three criteria. Also capture whether the change is UI-dominant, UX-dominant, or Mixed; whether design-system coverage is known, partial, or net new; and whether a Figma or design reference exists. Present classification and rationale for confirmation if the user is in the loop; otherwise document as `[INFERRED]` where needed. If the team template has an equivalent section, align with it.
 8. Fill all core sections (per team template or reference). Weave evidence from learnings and analytics into narrative sections where your template places them—not as a dump of raw tables.
 9. If helpful: add a short **Mapping / gap notes** block (optional) listing where the org template covers each Code-Left reference section, or what is missing.
 10. If the bet produces a reusable analytics insight, include a **Suggested analytics context update** with the row or bullet to add.
@@ -80,7 +80,7 @@ If missing details would change the bet’s value, scope, user, risk, or success
 
 - [ ] **Context used** block lists the sources actually used for direction, current reality, and workflow—or states what is still missing and whether it blocks the bet.
 - [ ] Affected journeys satisfy the four-part ` / ` rule **or** the team’s equivalent format, with no dropped intent.
-- [ ] **UX complexity** is captured (reference Section 0, team equivalent, or `[INFERRED]` with gaps listed).
+- [ ] **UX complexity and design-path inputs** are captured (reference Section 0, team equivalent, or `[INFERRED]` with gaps listed).
 - [ ] Clear before/after transformation under core outcome.
 - [ ] Out of scope and success signals are concrete.
 - [ ] If analytics sources were mapped, the brief uses a living analytics interpretation or explicitly says why analytics were not relevant.

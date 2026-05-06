@@ -26,8 +26,16 @@ Routing should reflect **product and behavior risk**, not only code size.
 
 ### UX complexity
 
-- **Classification:** Simple | Complex
+- **Classification:** Simple | Complex | N/A
 - **Evidence:** [cite Section 0 of the bet brief, or scenarios, or mark `[INFERRED]` with reason]
+
+### Design path
+
+- **Nature:** UI-dominant | UX-dominant | Mixed
+- **Design-system coverage:** Known pattern | Partial / unsure | Unknown / net new
+- **UX complexity:** Simple | Complex | N/A
+- **PM design recommendation:** Coding agent is enough | Designer review | Designer designs the feature | Spec skill + Claude Design / equivalent front-end design workflow | Designer + Figma
+- **PM action:** [what the PM should do next for the design dimension]
 
 ### Behavioral change to users
 
