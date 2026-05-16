@@ -1,6 +1,6 @@
 ---
 name: build-technical-spec
-description: Converts a bet brief into a standalone technical spec using the team’s own spec template when provided, with the Code-Left reference template as a gap check. Use when writing a technical spec, turning product intent into engineering requirements, defining user stories and acceptance criteria, updating a spec after brief or stakeholder changes, splitting a large bet into mini-specs, or reviewing spec readiness.
+description: Converts a bet brief into a standalone technical spec using the team’s own spec template when provided, with the Code-Left reference template as a gap check. **Embeds `## Complexity routing and delivery`** (assess-work-item-complexity + PR increments) so coding agents see execution routing and handoff constraints. Use when writing a technical spec, turning product intent into engineering requirements, defining user stories and acceptance criteria, updating a spec after brief or stakeholder changes, splitting a large bet into mini-specs, or reviewing spec readiness.
 ---
 
 # Build technical spec
@@ -11,7 +11,7 @@ Translate product intent (prefer `bet-brief.md` or org equivalent; **spec-only**
 
 The completed spec can be loaded into an implementation agent directly, or wrapped in an engineering change package when the handoff needs a shorter agent-facing artifact. Implementation agents should map the spec or package against available integration-point playbooks before writing code.
 
-**Team spec template:** If the org provides a technical-spec / architecture doc template, **follow its headings and file naming** as the structure of record. Always read [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md) as a **gap check** so nothing critical is missing (especially standalone product contract, testable FRs, and UX-derived acceptance criteria).
+**Team spec template:** If the org provides a technical-spec / architecture doc template, **follow its headings and file naming** as the structure of record. Always read [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md) as a **gap check** so nothing critical is missing (especially **`## Complexity routing and delivery`** for implementation handoff, standalone product contract, testable FRs, and UX-derived acceptance criteria). If the org template omits the complexity section, **add it** using the reference template’s structure and headings (or merge equivalent sections—do not skip the content).
 
 The spec must carry enough **bet context** in `## Context from the bet` (or the org’s equivalent section title) that implementers understand why the work matters—not only what to type.
 
@@ -77,7 +77,7 @@ Normative bullets must cover, when relevant:
 
 ## Workflow
 
-0. **Bet complexity and design path (for non-trivial work):** Follow [`../assess-work-item-complexity/SKILL.md`](../assess-work-item-complexity/SKILL.md), [`../assess-work-item-complexity/eng-complexity-rubric.md`](../assess-work-item-complexity/eng-complexity-rubric.md), and [`../assess-work-item-complexity/ux-design-path-rubric.md`](../assess-work-item-complexity/ux-design-path-rubric.md). A quick chat assessment is enough for most work; produce or update `bet-complexity-assessment.md` (or the org’s equivalent) only when risk, size, disagreement, or team policy warrants a durable file. Use the brief for UX complexity and design-path inputs when present; otherwise infer with `[INFERRED]`. Summarize both the engineering routing recommendation and the PM design action before deep spec drafting.
+0. **Work-item complexity, design path, and PR delivery (mandatory for every spec write or update):** Run the full [`../assess-work-item-complexity/SKILL.md`](../assess-work-item-complexity/SKILL.md) flow: [`../assess-work-item-complexity/eng-complexity-rubric.md`](../assess-work-item-complexity/eng-complexity-rubric.md), [`../assess-work-item-complexity/ux-design-path-rubric.md`](../assess-work-item-complexity/ux-design-path-rubric.md), and [`../assess-work-item-complexity/pr-increment-rubric.md`](../assess-work-item-complexity/pr-increment-rubric.md). Use the brief for UX inputs when present; otherwise infer with `[INFERRED]` and list gaps. **You must embed the results in the technical spec** under `## Complexity routing and delivery` (see [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md)) so implementation / coding agents see execution routing, design prerequisites, eng risk, integration mapping, and PR increment plan in one place. Treat that section as normative handoff: same matrix recommendations as the assessment skill, flag-OFF and increment rules from `pr-increment-rubric` where applicable. Also produce or update `bet-complexity-assessment.md` when risk, size, disagreement, or policy warrants a durable sibling artifact—**and link it from the spec’s complexity section**. For **spec-only** drafts with minimal intent, still fill the complexity section with best-effort scores and **Deferred** PR sizing where the plan is not yet sliceable.
 1. Read the **org technical spec template** if provided; always read [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md) and note any **gaps** the org template does not cover (add those sections or bullets rather than skipping).
 2. Read `bet-brief.md` (or org brief) when present. If missing, use spec plus user context; note gaps.
 3. If the brief already contains `## Spec split tracking`, treat it as authoritative — do **not** re-suggest a split.
@@ -95,20 +95,20 @@ Normative bullets must cover, when relevant:
 Then ask: **single spec**, **adopt split**, or **custom split**.
 
 5. If a technical spec file exists, read and improve it **in place** (preserve org structure); otherwise create from the org template or, absent that, from the reference template.
-6. Before functional requirements, scan the repo for primary surfaces and entities involved when working in a real codebase.
-7. Build the **standalone contract** first, then the rest.
-8. Challenge vague inputs: failures, scale, auth, data lifecycle.
-9. **User stories:** prioritized (P1, P2, P3…), independently testable where possible.
-10. **Functional requirements:** derived from the brief or spec-only intent.
-11. **UX translation (mandatory):** convert narrative into testable behavior, including defaults, ordering, empty/error/loading, destructive confirmations, a11y where relevant. Design files are illustrative only; **spec behavior wins**.
-
-12. **LLM or model-assisted behavior:** if used, keep FR-LLM-001+ and mark CRITICAL. If not used, **delete** the LLM subsection entirely.
-13. **Technical constraints:** thread API limits, quotas, latency, and provider caps through FRs and edge cases; mention in the intro.
-14. **Extra sections when needed:** data model, analytics event list, DoD checklist, security notes.
-15. **Remaining clarifications (non-blocking):** only truly non-blocking unknowns.
-16. **Success criteria:** measurable and technology-agnostic where appropriate.
-17. Run **standalone self-check** (below). If it fails, revise.
-18. Return a summary and remaining clarifications.
+6. **Insert or refresh `## Complexity routing and delivery`** in the spec body immediately after `## Context from the bet` (or equivalent), populated from step 0, before you treat the draft as complete. If the org uses different headings, map the same subsections (execution routing, tiers, three axes, PR increments) so nothing is dropped.
+7. Before functional requirements, scan the repo for primary surfaces and entities involved when working in a real codebase.
+8. Build the **standalone contract** first, then the rest.
+9. Challenge vague inputs: failures, scale, auth, data lifecycle.
+10. **User stories:** prioritized (P1, P2, P3…), independently testable where possible.
+11. **Functional requirements:** derived from the brief or spec-only intent.
+12. **UX translation (mandatory):** convert narrative into testable behavior, including defaults, ordering, empty/error/loading, destructive confirmations, a11y where relevant. Design files are illustrative only; **spec behavior wins**.
+13. **LLM or model-assisted behavior:** if used, keep FR-LLM-001+ and mark CRITICAL. If not used, **delete** the LLM subsection entirely.
+14. **Technical constraints:** thread API limits, quotas, latency, and provider caps through FRs and edge cases; mention in the intro.
+15. **Extra sections when needed:** data model, analytics event list, DoD checklist, security notes.
+16. **Remaining clarifications (non-blocking):** only truly non-blocking unknowns.
+17. **Success criteria:** measurable and technology-agnostic where appropriate.
+18. Run **standalone self-check** (below). If scope, surfaces, or rollout assumptions changed materially since step 6, refresh **`## Complexity routing and delivery`** from step 0 first. If it fails, revise.
+19. Return a summary and remaining clarifications.
 
 ## Split-spec tracking in the brief (when split adopted)
 
@@ -122,6 +122,8 @@ Each item: **Title**, **Scope (1–2 sentences)**, **Dependencies**, **Primary s
 
 Include `## Context from the bet` (or `## Context from product brief` if your team keeps that title) summarizing only what this mini-spec needs: journeys, in/out of scope for this slice, non-regression constraints, surface subset.
 
+**`## Complexity routing and delivery`** on a mini-spec should reflect **this slice** (work-item tier may still be **Bet** at program level—state that this file is a **mini-spec** slice). Link the parent program’s `bet-complexity-assessment.md` when it exists, then score **increment scope** and **PR plan** for what **this** spec alone covers—do not omit the section.
+
 ## Iterating on an existing spec
 
 When the brief changed or stakeholder comments arrive:
@@ -129,10 +131,12 @@ When the brief changed or stakeholder comments arrive:
 - Re-read brief and spec; apply comments to stories, FRs, edge cases, entities.
 - Resolve answered `[NEEDS CLARIFICATION]` items.
 - Refresh the standalone contract when decisions shift.
+- **Re-run step 0 complexity sizing and update `## Complexity routing and delivery`** when scope, surfaces, or risk materially changed.
 - Summarize deltas and remaining clarifications.
 
 ## Output quality checklist
 
+- [ ] **`## Complexity routing and delivery`** is present and complete (execution routing, tier, UX & design path, behavioural, engineering + integration mapping, PR increments or Deferred, open gaps)
 - [ ] Each user story has priority, independent test, and Given/When/Then where applicable
 - [ ] FRs are concrete and testable
 - [ ] LLM section present iff LLM used
@@ -145,7 +149,8 @@ When the brief changed or stakeholder comments arrive:
 
 ## Standalone self-check (mandatory before returning)
 
-- Can an implementer execute from this spec without the brief?
+- Can an implementer see **how to execute** (routing, design prerequisites, eng risk, PR plan) from **`## Complexity routing and delivery`** without opening other docs?
+- Can an implementer execute functional behavior from this spec without the brief?
 - Flag/cutover semantics explicit?
 - Ownership boundaries explicit?
 - Ordering and defaults explicit?

@@ -48,6 +48,16 @@ Routing should reflect **product and behavior risk**, not only code size.
 - **Evidence:** [tie to your engineering rubric; migrations, auth, new integrations, blast radius]
 - **Integration mapping (optional):** [If your repo has integration-point playbooks, cite them. Otherwise: “No catalog in repo” or “N/A — intrinsic Low”.]
 
+### PR complexity (implementation increments)
+
+_Use [`skills/pm/assess-work-item-complexity/pr-increment-rubric.md`](../../skills/pm/assess-work-item-complexity/pr-increment-rubric.md) when an approved technical spec or whole-feature plan exists, or when the team asked for PR count / increments. If there is no implementation plan yet, write **Deferred** and list gaps._
+
+- **Estimated PR count:** N
+- **Recommendation:** Single increment | Multi-increment series
+- **Why:** [short rationale — fewest safe increments]
+- **First increment for this run:** `<id>` — [title]
+- **Detail:** [full increment backlog here or link to `pr-complexity-assessment.md`]
+
 ---
 
 ## Recommendation

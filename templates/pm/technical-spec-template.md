@@ -15,7 +15,59 @@ Summarize only what implementers need so they do not infer strategy from code:
 
 - **Bet name and one-line value hypothesis**
 - **Primary users and non-goals**
-- **Links:** bet brief, complexity assessment if any
+- **Links:** bet brief, `bet-complexity-assessment.md` and/or `pr-complexity-assessment.md` if maintained alongside this spec
+
+---
+
+## Complexity routing and delivery _(mandatory for implementation agents)_
+
+**Purpose:** Hand off *how* this work should be executed—not only *what* to build. Coding and implementation agents use this to calibrate autonomy, sequencing, design prerequisites, and rollout. Populate using [`skills/pm/assess-work-item-complexity/SKILL.md`](../../skills/pm/assess-work-item-complexity/SKILL.md) (all rubrics, including [`pr-increment-rubric.md`](../../skills/pm/assess-work-item-complexity/pr-increment-rubric.md)). Do not invent facts; use `[INFERRED]` / `[UNKNOWN]` where inputs were incomplete.
+
+- **Durable assessments:** [paths to `bet-complexity-assessment.md` / `pr-complexity-assessment.md`, or **none — captured only in this section**]
+
+### Execution routing (primary)
+
+- **Primary recommendation:** Coding agent | PM self-serve | Engineering workflow | Hand to eng
+- **One-line why:** [synthesis from the three axes + product risk]
+- **Escalate or pause when:** [triggers]
+
+### Work-item tier
+
+[ Bet | Small feature | Bug fix ]
+
+### UX complexity & design path
+
+- **UX complexity:** Simple | Complex | N/A (UI-only) — [evidence; cite brief Section 0 or spec scenarios]
+- **Nature of change:** UX-dominant | UI-dominant | Mixed — [rationale]
+- **Design system coverage:** Known pattern | Partial / unsure | Unknown / net new
+- **Design path recommendation:** Coding agent | Designer review | Designer + Figma | Spec skill + front-end-designer skill
+- **PM / design action (before or alongside implementation):** [what must happen on the design/UX dimension]
+
+### Behavioural change to users
+
+- **Level:** Low | Medium | High
+- **Evidence:** [habits, comms, training, support—not UI surface alone]
+
+### Engineering complexity
+
+- **Level:** Low | Medium | High _(final; note if intrinsic differed after integration-point escalation)_
+- **Evidence:** [2–4 bullets tied to this spec]
+- **Integration mapping:** [recipe file(s) from repo catalog, **None — new pattern needed**, or **N/A — no integration catalog in repo**]
+
+### PR complexity (implementation increments)
+
+After this document is implementation-ready, size delivery slices per [`pr-increment-rubric.md`](../../skills/pm/assess-work-item-complexity/pr-increment-rubric.md).
+
+- **Estimated PR count:** N
+- **Recommendation:** Single increment | Multi-increment series
+- **Why:** [1–3 sentences — fewest safe increments]
+- **First increment for this run:** `<id>` — [title]
+- **Detail:** [full increment backlog from rubric template **or** link `pr-complexity-assessment.md`]
+- **If not yet sliceable:** **Deferred** — [what is missing]
+
+### Open gaps that affect execution
+
+- [Routing, design path, eng score, or increments could change if…]
 
 ---
 

@@ -1,117 +1,98 @@
-# UX / UI Design-Path Rubric
+# UX / UI design-path rubric
 
-Use this rubric whenever [`assess-work-item-complexity`](./SKILL.md) runs. It classifies the design dimension of a work item and tells the PM what to do next before implementation.
+Use this file to classify the **design path** for a work item and recommend the right PM / design action.
+Edit definitions here as the team's bar evolves; [`SKILL.md`](./SKILL.md) references this document.
 
-The design-path recommendation is separate from engineering routing. Engineering routing still decides whether the work should be handled by a coding agent, PM self-serve, engineering workflow, or engineering handoff. This rubric tells the PM whether the design dimension is ready for that path.
-
-## Logic Flow
-
-```mermaid
-flowchart TB
-    classifyChange{"Is this a UX or UI change?"}
-    designSystemGate{"Is the change supported by our design system?"}
-    uxComplexityGate{"Is this simple or complex according to our UX classification model?"}
-    uiKnown["UI + known design-system pattern: coding agents are enough"]
-    uiUnknown["UI + not known to design system: designer should design the feature"]
-    improveDS["Improve the design system with the new or missing pattern"]
-    uxSimple["UX simple + within design system: spec skill can generate the prompt for Claude Design or equivalent front-end design workflow"]
-    uxComplex["UX complex: work with the designer the old way, meaning in Figma"]
-
-    classifyChange --> designSystemGate
-    classifyChange --> uxComplexityGate
-    designSystemGate --> uiKnown
-    designSystemGate --> uiUnknown
-    uiUnknown --> improveDS
-    uxComplexityGate --> uxSimple
-    uxComplexityGate --> uxComplex
-```
-
-## Step 1: Nature Of Change
+## Step 1 — Nature of change
 
 Classify the work item as one of:
 
-| Classification | Definition | Examples |
-| --- | --- | --- |
-| **UI-dominant** | Changes what users see inside an existing flow. The user journey, decision model, and information architecture stay materially the same. | Restyle a card, adjust spacing, change copy, add a banner, swap an icon, update an existing empty state. |
-| **UX-dominant** | Changes how users think, navigate, decide, or complete a task. It affects flow, information architecture, user mental model, or behavior. | New user journey, changed onboarding flow, restructured navigation, new decision point, changed role behavior. |
-| **Mixed** | Both UX and UI are materially affected. Neither side is incidental. | New tab with a new flow and new layout, redesigned page that changes hierarchy and visual patterns. |
+| Classification  | Definition                                                                                                      | Examples                                                                                      |
+| --------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **UX-dominant** | Changes _how users think, navigate, or make decisions_. Involves flows, information architecture, or behaviour. | New user journey, restructured navigation, new decision point, onboarding flow, role change.  |
+| **UI-dominant** | Changes _what users see_ within an existing flow. Layout, styling, component usage, copy, visual polish.        | Restyling a card, swapping an icon, adjusting spacing, adding a banner to an existing page.   |
+| **Mixed**       | Both UX and UI are materially affected. Neither is trivial relative to the other.                               | New tab with new flow _and_ new visual patterns; redesigned page that changes IA and visuals. |
 
-Pick one and provide a one-line rationale. If uncertain, choose `Mixed` and mark the uncertainty as `[INFERRED]`.
+Pick one and provide a one-line rationale.
 
-## Step 2: Design-System Gate
+## Step 2 — Design system gate
 
-Determine whether the UI work is supported by the team's existing design system or established app patterns.
+Determine whether the visual / component work is **supported by the existing design system** (DS) or established product patterns.
 
-| Coverage | Definition |
-| --- | --- |
-| **Known pattern** | Required components, tokens, states, and layout conventions already exist in the product or design system. |
-| **Partial / unsure** | Most of the work maps to known patterns, but one or two parts are new or the agent cannot confirm coverage. Mark `[INFERRED]` and state what is uncertain. |
-| **Unknown / net new** | The work requires visual patterns, components, interactions, or layouts that do not exist today. A designer should define the pattern before implementation. |
+| DS coverage           | Definition                                                                                                                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Known pattern**     | Every component, token, and layout convention needed already exists (design-system primitives, styling tokens, established page patterns in the codebase). |
+| **Partial / unsure**  | Most of it maps to DS, but one or two elements are new or the agent cannot confirm coverage. Mark `[INFERRED]` and state what is uncertain.                |
+| **Unknown / net new** | The work requires visual patterns, components, or layouts that do not exist in the DS today. A designer should explore and extend the DS.                  |
 
-Use this checklist. If any answer is No or Unsure, coverage is at most `Partial / unsure`.
+### Checklist (answer each; if any answer is No or Unsure, coverage is at most Partial)
 
-- [ ] Required UI components map to existing product or design-system primitives.
-- [ ] Color, spacing, typography, and layout use existing tokens or conventions.
-- [ ] Page structure follows an established pattern.
-- [ ] No net-new icon set, illustration style, motion pattern, or interaction pattern is required.
+- [ ] All required UI components map to existing design-system or product primitives.
+- [ ] Colour, spacing, and typography use existing tokens or conventions (no ad-hoc one-offs unless already standard).
+- [ ] Page layout follows an established pattern already present in the app (e.g. existing tab structure, card grid, modal/drawer pattern).
+- [ ] No net-new icon set, illustration style, or animation pattern is required.
 
-If coverage is `Unknown / net new`, include this PM action: designer should define the feature pattern, and the team should improve the design system with the missing pattern.
+If you **cannot verify** a checklist item from the repo or available docs, mark it `[INFERRED]` and default to **Partial / unsure**.
 
-## Step 3: UX Complexity
+## Step 3 — UX complexity (Section 0 model)
 
-Apply this step only to `UX-dominant` and `Mixed` work.
+**Applies to:** `UX-dominant` and `Mixed` items.
+**Skip for:** `UI-dominant` items — record "N/A — UI-only; no flow, IA, or behavioural changes" and move to the decision table.
 
-For `UI-dominant` work, record:
+Use the three criteria from [`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md) Section 0:
 
-> N/A - UI-only; no flow, information architecture, or behavior change.
+| Criterion                    | Simple                               | Complex                                          |
+| ---------------------------- | ------------------------------------ | ------------------------------------------------ |
+| **Scenarios**                | 1-2 clear, linear scenarios          | 3+ scenarios with branching user paths           |
+| **Flow impact**              | Small correction to an existing flow | New flow or major restructure of an existing one |
+| **Information architecture** | Same IA with minor additions         | Challenges or restructures existing IA           |
 
-For UX work, use Section 0 of the Code-Left reference bet brief, [`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md):
+**Decision rule:** All three Simple → **Simple**. Any one Complex → **Complex**.
 
-| Criterion | Simple | Complex |
-| --- | --- | --- |
-| **Scenarios** | 1-2 clear, linear scenarios | 3+ scenarios with branching paths |
-| **Flow impact** | Small correction to an existing flow | New flow or major restructure |
-| **Information architecture** | Same IA with minor additions | Challenges or restructures existing IA |
+If the brief has Section 0 filled, copy it. If not, infer with `[INFERRED]` and list unknowns.
 
-Decision rule: all three Simple means `Simple`. Any one Complex means `Complex`.
+## Decision table — PM / design recommendation
 
-If the brief has UX complexity filled in, use it. If not, infer with `[INFERRED]` and list unknowns.
+Combine the outputs of Steps 1–3 to determine the recommended design path:
 
-## PM Design Recommendation
+| Nature (Step 1) | DS coverage (Step 2) | UX complexity (Step 3) | Design path recommendation                                                                                                                                            |
+| --------------- | -------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **UI-dominant** | Known pattern        | N/A                    | **Coding agent** — agents can implement using DS. No designer needed (subject to Eng + Behavioural axes in routing matrix).                                           |
+| **UI-dominant** | Partial / unsure     | N/A                    | **Designer review** — designer confirms or extends DS for uncertain elements; then agents implement. Flag DS gaps to improve the system.                              |
+| **UI-dominant** | Unknown / net new    | N/A                    | **Designer** — designer explores and creates the new pattern; feed learning back into the DS.                                                                         |
+| **UX-dominant** | Known pattern        | Simple                 | **Spec skill + front-end-designer skill** — spec workflow generates implementation-ready framing; front-end-designer skill produces the UI. No Figma needed. |
+| **UX-dominant** | Partial or Unknown   | Simple                 | **Designer review** — designer validates uncertain DS elements and simple UX; then spec skill can proceed.                                                            |
+| **UX-dominant** | any                  | Complex                | **Designer + Figma** — traditional design process. Designer owns exploration in Figma; spec work pauses on UX sections until design is ready.                         |
+| **Mixed**       | Known pattern        | Simple                 | **Spec skill + front-end-designer skill** — treat like UX-dominant Simple with known DS.                                                                              |
+| **Mixed**       | Partial or Unknown   | Simple                 | **Designer review** — designer validates DS gaps; then spec skill proceeds.                                                                                           |
+| **Mixed**       | any                  | Complex                | **Designer + Figma** — traditional design process.                                                                                                                    |
 
-Use the outputs above to recommend a PM action:
+### Reconciliation with Eng / Behavioural axes
 
-| Nature | Design-system coverage | UX complexity | PM design recommendation |
-| --- | --- | --- | --- |
-| **UI-dominant** | Known pattern | N/A | **Coding agent is enough** for the design dimension. Proceed with normal routing and review. |
-| **UI-dominant** | Partial / unsure | N/A | **Designer review**. Designer confirms the uncertain pattern, then implementation can proceed. |
-| **UI-dominant** | Unknown / net new | N/A | **Designer designs the feature**. Feed the missing pattern back into the design system. |
-| **UX-dominant** | Known pattern | Simple | **Spec skill + Claude Design / equivalent front-end design workflow**. No Figma phase needed by default. |
-| **UX-dominant** | Partial / unsure | Simple | **Designer review**. Designer confirms the UX and design-system fit, then spec work can proceed. |
-| **UX-dominant** | Any | Complex | **Designer + Figma**. Work with design the traditional way before implementation. |
-| **Mixed** | Known pattern | Simple | **Spec skill + Claude Design / equivalent front-end design workflow**. Treat as simple UX with known patterns. |
-| **Mixed** | Partial / unsure | Simple | **Designer review**. Resolve the uncertainty before implementation. |
-| **Mixed** | Any | Complex | **Designer + Figma**. Work with design the traditional way before implementation. |
+The design path recommendation is a **parallel** recommendation. It does **not** override the primary execution recommendation from the routing matrix (Coding agent / Engineering workflow / Hand to eng).
 
-## Reconcile With Engineering Routing
+- If the routing matrix says **Engineering workflow** or **Hand to eng**, that remains the primary execution path. The design path tells the PM _how to handle the design/UX dimension_ alongside that execution path.
+- If the routing matrix says **Coding agent** but the design path says **Designer + Figma**, the PM should involve a designer for the UX/visual work _before_ handing to the coding agent for implementation.
+- Always present both recommendations together so the PM sees the full picture.
 
-Always present both recommendations:
+### "Spec skill + front-end-designer skill" explained
 
-- **Engineering routing:** coding agent, PM self-serve, engineering workflow, or hand to engineering.
-- **PM design action:** the recommendation from this rubric.
+When the design path recommends this, the PM should:
 
-The PM design action does not override engineering routing. If engineering routing says `Hand to engineering`, that remains primary even when the design path is simple. If engineering routing says `Coding agent` but this rubric says `Designer + Figma`, the PM should involve design before handing work to a coding agent.
+1. Run their technical-spec workflow (e.g. `build-technical-spec`) to produce implementation-ready framing (user stories, acceptance criteria, component mapping).
+2. Use a front-end-designer skill or equivalent to generate production-grade UI within the existing DS.
+3. The combination replaces the need for a separate Figma design phase for simple, DS-covered changes.
 
-## Output Format
+## Output format
 
-Include this block in quick assessments and full assessment files:
+Include in your assessment (Path A or Path B):
 
 ```markdown
 ### Design path
 
-- **Nature:** [UI-dominant | UX-dominant | Mixed] - [one-line rationale]
-- **Design-system coverage:** [Known pattern | Partial / unsure | Unknown / net new] - [one-line rationale]
-- **UX complexity:** [Simple | Complex | N/A] - [one-line rationale]
-- **PM design recommendation:** [Coding agent is enough | Designer review | Designer designs the feature | Spec skill + Claude Design / equivalent front-end design workflow | Designer + Figma]
-- **PM action:** [what the PM should do next]
+- **Nature:** [UX-dominant | UI-dominant | Mixed] — [one-line rationale]
+- **DS coverage:** [Known pattern | Partial / unsure | Unknown / net new] — [one-line rationale; list any [INFERRED] items]
+- **UX complexity:** [Simple | Complex | N/A] — [one-line rationale or "UI-only"]
+- **Design recommendation:** [Coding agent | Designer review | Designer + Figma | Spec skill + front-end-designer skill]
+- **PM action:** [what the PM should do next for the design dimension]
 ```

@@ -1,154 +1,260 @@
 ---
 name: assess-work-item-complexity
-description: Assesses work-item complexity (bets, scoped enhancements, bugs) across UX, behavioral change, and engineering complexity; recommends coding agent, PM self-serve, engineering workflow, or handoff to engineering. Accepts the team’s existing brief, spec, ticket, or notes—Code-Left templates are reference shapes for scoring, not replacements. Use before deep technical spec work, when routing a bet, or triaging small work.
+description: Assesses work-item complexity (bets, small features, or bugs) across UX, user behavioural change, and engineering complexity; recommends coding agent, PM self-serve, eng workflow, or hand-off to eng. When an approved spec or whole-feature plan exists—or when the user asks for PR count or increments—also estimates implementation PRs and an ordered increment backlog (same guardrails as wisdomcom assess-pr-complexity). Accepts briefs, specs, scenarios, or repros. Works with the team’s artifacts; Code-Left templates are reference shapes—see Purpose.
 ---
 
-# Assess work-item complexity
+# Assess work-item complexity (coding agent / PM self-serve / eng workflow / hand to eng)
 
 ## Purpose
 
-Produce a **routing recommendation** from three axes plus a mandatory **PM design-path recommendation**. Output must be **evidence-based** from available inputs—do not invent constraints, metrics, or user research.
+Produce a **routing recommendation** for the requester based on three axes; when an implementation-ready plan exists or the user asks for delivery slicing, also address **PR complexity** via [`pr-increment-rubric.md`](./pr-increment-rubric.md). Output must be **evidence-based** from the available input—do not invent constraints or metrics.
 
-**Org templates:** Score using whatever brief, PRD, spec, or ticket the team already uses. Use Code-Left templates ([`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md), [`bet-complexity-assessment-template.md`](../../../templates/pm/bet-complexity-assessment-template.md)) as **reference** for what good evidence looks like—do **not** require rewriting their artifact into Code-Left format before routing. If their template omits UX complexity, design-system coverage, behavioral risk, or engineering cues, **infer** with `[INFERRED]` and **suggest** additions.
+**Org artifacts:** Score using whatever brief, PRD, spec, or ticket the team already uses. Use Code-Left templates ([`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md), [`bet-complexity-assessment-template.md`](../../../templates/pm/bet-complexity-assessment-template.md)) as **reference** for Section 0-style UX complexity and assessment shape—do **not** require rewriting their artifact into Code-Left format before routing. If their template omits UX complexity, design-system coverage, behavioural risk, or engineering cues, **infer** with `[INFERRED]` and list gaps.
 
-Routing must reflect **product and behavior risk**, not only code size: a technically small change can still need engineering workflow if it changes trust, positioning, compliance exposure, or user mental model.
+Routing must reflect **product and behaviour risk**, not only code size: a technically small change can still need engineering workflow if it changes trust, positioning, compliance exposure, or user mental model.
 
 ## When to apply
 
-- Before substantial technical-spec work (especially when combined with `build-technical-spec`).
-- When the user asks where a bet should land.
-- When the brief lacks UX complexity (or equivalent)—infer cautiously and label `[INFERRED]`.
-- For bugs or small enhancements when deciding safe autonomy.
+- **Before** substantial technical-spec work (mandatory when invoked from product-spec or `build-technical-spec` workflows).
+- When the user asks where a bet should land organizationally.
+- When the brief exists but Section 0 (or equivalent UX complexity) is empty—infer cautiously and mark gaps.
+- When a user describes a **bug to fix** or a **small feature** and wants to know if it can be handled quickly.
+- When invoked from a quick-fix-style command to decide whether to proceed or escalate.
+- When the user asks **how many PRs** a plan needs, for an **increment backlog**, or which **first increment** to implement—apply [`pr-increment-rubric.md`](./pr-increment-rubric.md) in addition to the three axes (when an approved plan exists; otherwise defer PR boundaries).
 
 ## Work-item tiers
 
-| Tier | Typical input | When to use |
-| --- | --- | --- |
-| **Bet** | Team brief/PRD, `bet-brief.md`, `Technical Spec.md`, or equivalent | Full feature or initiative |
-| **Scoped enhancement** | Scenario, user story, ticket, Notion doc, or short bullets (problem, user, scope, surfaces) | Meaningful change without a full brief |
-| **Bug fix** | Repro, logs, ticket | Broken behavior |
+Classify the incoming request into a tier. This determines the minimum input required.
 
-If tier is unclear, ask one question: "Is this a bug fix, a scoped enhancement, or part of a larger bet?"
+| Tier              | Typical input                                                                    | When to use                                          |
+| ----------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Bet**           | Team brief / PRD, `bet-brief.md`, `Technical Spec.md`, or equivalent             | Full feature or initiative with product brief / spec |
+| **Small feature** | Scenario, user story, ticket, or 3–5 bullets (problem, user, scope, surfaces)     | Scoped enhancement that doesn't warrant a full brief |
+| **Bug fix**       | Repro scenario, error message / log, or ticket description                       | Something is broken and needs to be fixed            |
+
+If the agent **cannot determine the tier** from context, ask **one** clarifying question: "Is this a bug fix, a small feature, or part of a larger bet?"
 
 ## Required inputs (use what exists)
 
 ### Bet tier
 
-1. **Product brief / PRD / `bet-brief.md`** (or your team’s filename) if present — UX complexity **or equivalent** and intent.
-2. **`Technical Spec.md`** (or org spec doc) if present — engineering sizing.
-3. Optional: user message, issue link, or ticket for context.
+1. **Product brief / `bet-brief.md`** (or your team’s filename) if present — read Section 0 (or equivalent) for **UX complexity** and product intent.
+2. **`Technical Spec.md`** or draft spec (if present) — use when the brief is missing or to size eng complexity.
+3. Optional: user message, ticket link, or `$ARGUMENTS` for context.
 
-If **no brief and no spec**, ask for a brief excerpt, spec outline, ticket, or 5–10 bullets. Do not fabricate a full assessment.
+If **no brief and no spec**, ask for one of: paste brief excerpt, paste spec outline, ticket, or 5–10 bullets (problem, user, scope, surfaces, risks). Do not fabricate a full assessment.
 
-### Scoped enhancement / bug tier
+### Small feature / Bug fix tier
 
-Scenario, repro, ticket, or short bullets are enough. Do **not** demand a full brief.
+A **scenario or repro description** is sufficient. Accept any of:
+
+- A written scenario ("When a user does X, Y should happen but Z happens instead")
+- An error message or log snippet
+- A short bullet list describing the desired change
+- A ticket or issue description
+
+Do **not** demand a full brief or spec for these tiers.
 
 ## Axis 1 — UX complexity and design path
 
-This axis produces two outputs:
+This axis produces **two outputs**: a **design path classification** (UX vs UI, design system coverage, recommended PM/design action) and a **UX Simple/Complex score**.
 
-1. **PM design-path recommendation** - how the PM should handle the UX/UI design dimension before implementation.
-2. **UX complexity score** - `Simple`, `Complex`, or `N/A` for UI-only work.
+**Before scoring:** Read [`ux-design-path-rubric.md`](./ux-design-path-rubric.md) and follow all three steps:
 
-Before scoring, read [`ux-design-path-rubric.md`](./ux-design-path-rubric.md) and follow its flow:
+1. **Nature of change** — classify as `UX-dominant`, `UI-dominant`, or `Mixed`.
+2. **Design system gate** — classify as `Known pattern`, `Partial / unsure`, or `Unknown / net new` using the checklist in the rubric.
+3. **UX complexity (Section 0 model)** — for `UX-dominant` and `Mixed`, apply the three criteria (Scenarios / Flow impact / IA) from the brief or infer with `[INFERRED]`. For `UI-dominant`, record "N/A".
 
-1. Classify the work as `UI-dominant`, `UX-dominant`, or `Mixed`.
-2. Apply the design-system gate: `Known pattern`, `Partial / unsure`, or `Unknown / net new`.
-3. For `UX-dominant` and `Mixed`, score UX as `Simple` or `Complex`; for `UI-dominant`, record UX complexity as `N/A`.
-4. Recommend the PM design action from the rubric.
+Then use the **decision table** in the rubric to determine the **design path recommendation** (Coding agent / Designer review / Designer + Figma / Spec skill + front-end-designer skill — adapt skill names to your tooling; see rubric).
 
-**Reference criteria** (when the team has no UX section): Section **0. UX complexity** in [`templates/pm/bet-brief-template.md`](../../../templates/pm/bet-brief-template.md).
+**Source of truth for UX Simple/Complex:** Section **0. UX complexity** in the reference template ([`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md): Scenarios / Flow impact / Information architecture → Simple vs Complex).
 
-- If the team brief has a filled UX / IA / scenario classification: **use it** as the source of truth.
-- If missing: infer Simple vs Complex using the same three criteria; label `[INFERRED]` and list unknowns.
-- If no brief: infer from spec, ticket, or scenario with `[INFERRED]`.
-- Small fixes without a brief: default **Simple** unless multiple flows or IA change.
-- UI-dominant work: UX complexity is **N/A**. Use the design-system gate to recommend whether a coding agent is enough, designer review is needed, or a designer should define the feature and improve the design system.
+- If the team brief has a filled UX / IA / scenario classification: **copy the classification and rationales** into the assessment.
+- If Section 0 (or equivalent) is missing or incomplete: infer **Simple vs Complex** using the same three criteria from [`bet-brief-template.md`](../../../templates/pm/bet-brief-template.md). Label as `[INFERRED]` and list what is unknown.
+- If there is **no brief**: infer from the spec's user stories, surfaces, and flows with `[INFERRED]` and explicit unknowns.
+- **Small features and bugs without a brief:** Default to **Simple** with a one-line justification (e.g. "Bug fix within existing UI surface; no new flows or IA changes"). Override to Complex only if the change touches multiple flows or introduces new information architecture.
+- **UI-dominant items:** UX complexity is **N/A** — record "UI-only; no flow, IA, or behavioural changes". The design path recommendation from the rubric still applies.
 
-## Axis 2 — Behavioral change
+This axis is **not** the same as behavioural change (below).
 
-Rate **Low / Medium / High** by how much users must change habits, mental model, training, comms, or support load—not UI surface alone.
+## Axis 2 — Behavioural change to users
 
-| Level | Meaning |
-| --- | --- |
-| **Low** | Matches expectations; minimal comms. |
-| **Medium** | New steps or labels; moderate help. |
-| **High** | New workflow, retraining, trust or positioning shift, or high support risk. |
+Rate **Low / Medium / High** based on how much **users** must change habits, mental model, training, comms, or support load—not UI surface area alone.
 
-Small fixes: default **Low** unless user-visible behavior materially changes meaning.
+| Level      | Meaning                                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------------------- |
+| **Low**    | Fits existing expectations; no new habit; minimal comms.                                                      |
+| **Medium** | New steps or labels users must learn; moderate comms or help.                                                 |
+| **High**   | New workflow, role change, retraining, or high support risk; breaking change to how they think about the job. |
+
+Small features and bugs: Default to **Low** with a one-line justification unless the change visibly alters user-facing behaviour (e.g. "Bug fix restores expected behaviour; no new habits required").
+
+**Overlap with UX:** UX can be **Simple** and behavioural change **High** (a small UI change can redefine a core task). Document both separately.
 
 ## Axis 3 — Engineering complexity
 
-Read [`eng-complexity-rubric.md`](./eng-complexity-rubric.md). Assign **Low / Medium / High** with 2–4 bullets tied to the brief or spec.
+**Before scoring:** Follow the **Integration points** steps in [`eng-complexity-rubric.md`](./eng-complexity-rubric.md): if the repo documents an integration catalog and recipe folder (for example `.claude/skills/README.md` plus `.claude/skills/integration-points/`, or your org’s equivalent), read the catalog and scan the recipes—do **not** assume a fixed list of pattern names from memory. If there is no catalog, the rubric tells you how to record **N/A**.
 
-Apply the rubric’s **optional integration-point mapping** if your repo maintains integration recipes; otherwise state **N/A**.
+Then read the rest of the rubric and assign **Low / Medium / High** with 2–4 bullets tied to the spec, brief, or ticket. When intrinsic Eng is **Medium** or **High**, always state **which** integration recipes apply (if any), or explicitly **"No clear mapping — new pattern needed"** (and apply rubric escalation if required).
 
 ## Routing recommendation (default matrix)
 
-Unless the org overrides in **how we work** docs:
+Apply this **default** unless the user's org defines overrides in **how we work** docs. Always state **one primary** recommendation plus **when to escalate**.
 
-| Eng | UX (brief) | Behavioral | Primary recommendation |
-| --- | --- | --- | --- |
-| Low | Simple | Low | **Coding agent** — implement in-repo following documented standards; human reviews. |
-| Low | Simple | Med/High | **Engineering workflow** — align comms, training, edge cases before build. |
-| Low | Complex | any | **Engineering workflow** — design or IA validation. |
-| Medium | any | Low/Med | **Engineering workflow** — standard build; PM pairs on spec and acceptance. |
-| Medium | any | High | **Engineering workflow** or **hand to engineering** if rollout risk is high. |
-| High | any | any | **Hand to engineering** — eng owns execution risk; PM owns intent and acceptance. |
+**PM self-serve:** Valid for some orgs when the change is product-owned collateral only; if undefined, treat PM self-serve as "engineering workflow with no code change."
 
-**PM self-serve** is valid for some orgs when the change is product-owned collateral only; if **how we work** does not define it, treat PM self-serve as "engineering workflow with no code change."
+| Eng    | UX (brief) | Behavioural | Primary recommendation                                                                                    |
+| ------ | ---------- | ----------- | --------------------------------------------------------------------------------------------------------- |
+| Low    | Simple     | Low         | **Coding agent** — agent executes on the repo following documented standards; requester reviews the output. |
+| Low    | N/A        | Low         | **Coding agent** only when the design path says the UI pattern is known and coding-agent-ready.           |
+| Low    | Simple     | Med/High    | **Engineering workflow** — PM drives; align on comms/training and edge cases before build.               |
+| Low    | N/A        | Med/High    | **Engineering workflow** — same as above.                                                                |
+| Low    | Complex    | any         | **Engineering workflow** — design/IA validation; may still be PM-led with eng consult.                      |
+| Medium | any        | Low/Med     | **Engineering workflow** — standard build path; PM pairs on spec/AC.                                     |
+| Medium | any        | High        | **Engineering workflow** or **hand to eng** if rollout risk is high.                                     |
+| High   | any        | any         | **Hand to eng** — eng owns execution and risk; PM owns intent and acceptance.                              |
 
-**Coding agent** also implies the requester can enforce repo policies (tests, lint, typecheck, feature flags, security review triggers). If those are undefined, recommend **engineering workflow** until they exist.
+**Coding agent** means the work is small and safe enough for an AI coding agent to implement directly, following repo standards the team documents (e.g. feature flags default OFF, structured logging not raw console, typed errors, lint, format, typecheck, validated inputs, service-layer patterns). If those standards are undefined, recommend **engineering workflow** until they exist. The requester reviews and merges.
 
-**Escalation:** If the assessment depends on `[INFERRED]` or `[UNKNOWN]` for critical areas, recommend **engineering workflow** at minimum until clarified.
+**Design path (parallel recommendation):** The routing matrix determines **execution**. The **design path** from [`ux-design-path-rubric.md`](./ux-design-path-rubric.md) is **parallel** and tells the PM how to handle the design/UX dimension. Always present both. The design path never overrides execution—e.g. if Eng is High → **Hand to eng** stays primary even if design path says **Coding agent**. See reconciliation rules in the rubric.
 
-**Design path:** The design-path recommendation is mandatory and parallel. It never overrides the primary engineering routing recommendation. Always tell the PM both the execution route and the design action.
+**Escalation hints:** If assessment relied on `[INFERRED]` or `[UNKNOWN]` for critical areas, recommend **engineering workflow** at minimum until clarified.
+
+## PR complexity (implementation increments)
+
+This answers **how many PRs / increments** (and in what order), not **who executes** the work. It is **orthogonal** to the routing matrix: a **Coding agent** path can still ship as multiple increments; **Hand to eng** can be a single PR.
+
+**When to include**
+
+- **Always** when the user asks for PR count, an increment backlog, or “first increment” for a run.
+- **Bet tier:** When an **approved** `Technical Spec.md`, integration plan, or equivalent exists, add a PR complexity subsection to Path A (or a standalone report in chat). If only a brief exists, set PR complexity to **Deferred** and list under open gaps—do not invent boundaries from product intent alone.
+- **Small feature / bug fix:** Default **one increment** with a one-line rationale unless the scenario clearly requires multiple independently landable slices.
+
+**How to produce it:** Read and follow [`pr-increment-rubric.md`](./pr-increment-rubric.md) (operating rules, flag-off acceptance criteria, integration-point discovery, report structure). Prefer the **fewest** increments that stay safe and reviewable; cap and re-scope guidance is in the rubric.
+
+**Execution hint:** If delivery genuinely needs **more than ~3** landable increments or ordering is brittle, note in the assessment that coordination may favor **engineering workflow** even when the Eng axis is only Medium—this is **guidance**, not an automatic override of the matrix.
 
 ## Outputs
 
-### Path A — Quick assessment (default)
+### Path A — Full assessment (Bet tier, or any item scoring above Coding agent)
 
-Post a short assessment in chat unless the user asks for a file or the work is large/high-risk:
+#### 1. File: `bet-complexity-assessment.md` (same directory as the brief or spec you were given, or path the user chooses)
+
+Use [`templates/pm/bet-complexity-assessment-template.md`](../../../templates/pm/bet-complexity-assessment-template.md) as the default shape if the org has no template. Minimum structure:
 
 ```markdown
-## Quick complexity assessment
+# Complexity assessment — [feature / bet / bug name]
 
-- **Tier:** [Bet | Scoped enhancement | Bug fix]
-- **UX complexity:** [Simple | Complex | N/A] — [evidence]
-- **Design path:** [UI-dominant | UX-dominant | Mixed] / [Known pattern | Partial / unsure | Unknown / net new] → [PM design recommendation] — [PM action]
-- **Behavioral change:** [Low | Medium | High] — [evidence]
-- **Engineering complexity:** [Low | Medium | High] — [evidence]
-- **Recommendation:** [Coding agent | PM self-serve | Engineering workflow | Hand to engineering]
-- **Open gaps:** [...]
+## Inputs used
+
+- Brief: [path or "none"]
+- Spec: [path or "none"]
+- Scenario / description: [inline or "none"]
+
+## Work-item tier
+
+[Bet | Small feature | Bug fix]
+
+## Axis scores
+
+### UX complexity
+
+- Classification: Simple | Complex | N/A (UI-only)
+- Evidence: [bullets; cite Section 0, spec, or scenario]
+
+### Design path
+
+- Nature: [UX-dominant | UI-dominant | Mixed] — [one-line rationale]
+- DS coverage: [Known pattern | Partial / unsure | Unknown / net new] — [one-line rationale; list any [INFERRED] items]
+- UX complexity: [Simple | Complex | N/A] — [one-line rationale or "UI-only"]
+- Design recommendation: [Coding agent | Designer review | Designer + Figma | Spec skill + front-end-designer skill]
+- PM action: [what the PM should do next for the design dimension]
+
+### Behavioural change
+
+- Level: Low | Medium | High
+- Evidence: [bullets]
+
+### Engineering complexity
+
+- Level: Low | Medium | High (final; note if intrinsic differed before integration-point escalation)
+- Evidence: [bullets; tie to rubric]
+- Integration mapping: [recipe file(s), "None — new pattern needed", or "N/A — no integration catalog in repo"]
+
+### PR complexity (implementation increments)
+
+Follow [`pr-increment-rubric.md`](./pr-increment-rubric.md). Minimum in this file:
+
+- **Estimated PR count:** N
+- **Recommendation:** Single increment | Multi-increment series
+- **Why:** [1–3 sentences]
+- **First increment for this run:** `<id>` — [title]
+- **Detail:** [paste full increment blocks from rubric template] **or** link `pr-complexity-assessment.md`
+- **Status:** [omit if sized] **Deferred** — [gaps] _(brief/spec-only; no implementation plan to slice)_
+
+## Recommendation
+
+- **Primary:** Coding agent | PM self-serve | Engineering workflow | Hand to eng
+- **One-line why:** [synthesis]
+- **If wrong, escalate when:** [triggers]
+
+## Open gaps
+
+- [UNKNOWN] / [INFERRED] items that could change the call
 ```
 
-### Path B — Full assessment file
+#### 2. Brief summary (only if a team brief file exists)
 
-Write **`bet-complexity-assessment.md`** next to the brief or spec (or path the user chooses) when the bet is large, high-risk, repeated, disputed, or the user wants a durable artifact. Use [`templates/pm/bet-complexity-assessment-template.md`](../../../templates/pm/bet-complexity-assessment-template.md) as the **default shape**; if the org has its own assessment section or doc, fill **that** instead and still cover the three axes with evidence.
-
-If `bet-brief.md` or the team’s brief file exists and the user wants a summary in-product, append under their UX complexity section (or right after it):
+Append a short subsection under Section 0 (or immediately after it) in the brief:
 
 ```markdown
 ### Complexity routing summary
 
-- **Recommendation:** [Coding agent | PM self-serve | Engineering workflow | Hand to engineering]
+- **Recommendation:** [Coding agent | PM self-serve | Engineering workflow | Hand to eng]
 - **Detail:** See `bet-complexity-assessment.md`.
 ```
 
-Skip editing the brief if the user declines.
+If the user prefers not to edit the brief, skip this and mention it in chat.
+
+#### 3. Spec-only path (no brief)
+
+If only a spec exists: write **`bet-complexity-assessment.md`** as above when a durable artifact is needed. **`build-technical-spec`** requires **`## Complexity routing and delivery`** inside `Technical Spec.md` (see [`templates/pm/technical-spec-template.md`](../../../templates/pm/technical-spec-template.md)); when you are **not** running that workflow, add the same section (or a short block with recommendation + link to `bet-complexity-assessment.md`) **unless** the user declines to modify the spec file.
+
+### Path B — Lightweight assessment (Coding agent recommendation)
+
+When the assessment lands on **Coding agent**, a full file is not required. Instead, present a short block **in chat**:
+
+```markdown
+### Quick assessment — [name]
+
+- **Tier:** [Small feature | Bug fix]
+- **UX:** Simple — [one-line reason]
+- **Design path:** [Nature] / [DS coverage] → [Design recommendation] — [one-line PM action]
+- **Behavioural:** Low — [one-line reason]
+- **Eng:** Low — [one-line reason]
+- **PR complexity:** [Single increment | N increments — one line; or "Deferred — no spec"]
+- **Recommendation:** Coding agent
+- **Repo standards:** [tests, lint, typecheck, feature flags, logging, security—per org]
+```
+
+If the user requests a file or the item escalates during implementation, fall back to Path A.
 
 ## Guardrails
 
-- No invented metrics or research.
-- One to two pages for a written assessment.
-- Bugs and small features: never require a full brief.
+- Do **not** invent metrics, user research, or engineering facts.
+- Mark unknowns `[UNKNOWN]`; inferred items `[INFERRED]` with reason.
+- Keep the assessment **one to two pages**; depth lives in bullets, not prose.
+- For bugs and small features, do **not** demand a full brief. A scenario or repro description is sufficient input.
+- **PR complexity:** Do not invent PR boundaries from a product brief alone (no spec/plan). Do not fabricate integration-point names—discover them from the repo or list gaps per [`pr-increment-rubric.md`](./pr-increment-rubric.md).
 
 ## Quality check
 
-- [ ] Tier identified
-- [ ] All axes scored with evidence
-- [ ] Design path classified with evidence using [`ux-design-path-rubric.md`](./ux-design-path-rubric.md)
-- [ ] PM design action presented next to the engineering routing recommendation
-- [ ] Recommendation matches matrix or documents an override from **how we work**
-- [ ] Open gaps listed
+- [ ] Work-item tier identified
+- [ ] All three axes scored with evidence
+- [ ] Design path classification completed (nature, DS coverage, UX complexity, design recommendation) per [`ux-design-path-rubric.md`](./ux-design-path-rubric.md)
+- [ ] Recommendation matches the default matrix or documents an explicit override from **how we work**
+- [ ] Design path recommendation is consistent with the execution recommendation (reconciliation rule applied)
+- [ ] If Coding agent recommended, confirmed all three axes are at their lowest level (Eng Low, UX Simple or N/A with non-blocking design path, Behavioural Low)
+- [ ] For Path A: `bet-complexity-assessment.md` written (or user declined file write—then paste full markdown in chat)
+- [ ] If applicable: PR complexity addressed per [`pr-increment-rubric.md`](./pr-increment-rubric.md) (or explicitly **Deferred** with reason)
+- [ ] Open gaps listed for PM/eng follow-up
